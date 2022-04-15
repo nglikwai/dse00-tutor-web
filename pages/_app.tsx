@@ -1,8 +1,9 @@
-import '../styles/globals.css'
+import '../src/i18n'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import theme from 'src/constants/theme'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
@@ -12,10 +13,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `
-
-const theme = {
-  // custom theme
-}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
