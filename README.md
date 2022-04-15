@@ -27,11 +27,11 @@ Before run this project, you need to install
 
 ## Environments
 
-| Environment | Host                     | Branch        | .env               | NODE_ENV      | APP_ENV       |
-| ----------- | ------------------------ | ------------- | ------------------ | ------------- | ------------- |
-| local       | http://localhost:3000/   | `n/a`         | `.env.cmdrc`       | `development` | `any`         |
-| development |                          | `development` | `.env.development` | `production`  | `development` |
-| production  | https://tutor.dse00.com/ | `production`  | `.env.production`  | `production`  | `production`  |
+| Environment | Host                            | Branch        | .env               | NODE_ENV      | APP_ENV       |
+| ----------- | ------------------------------- | ------------- | ------------------ | ------------- | ------------- |
+| local       | http://localhost:3000/          | `n/a`         | `.env.cmdrc`       | `development` | `any`         |
+| development | https://dse00-tutor.netlify.app | `development` | `.env.development` | `production`  | `development` |
+| production  | https://tutor.dse00.com/        | `production`  | `.env.production`  | `production`  | `production`  |
 
 ## Coding
 
