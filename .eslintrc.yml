@@ -11,9 +11,9 @@ parserOptions:
     jsx: true
 
 plugins:
+  - eslint-plugin-ramda
   - eslint-plugin-react-hooks
   - simple-import-sort
-  - unicorn
 
 extends:
   - standard
@@ -22,16 +22,15 @@ extends:
   - plugin:prettier/recommended
   - plugin:react/recommended
   - plugin:ramda/recommended
-  - plugin:redux-saga/recommended
 
 settings:
   react:
     version: detect
 
 rules:
-  no-console: ["warn", { allow: ["warn", "error"] }]
+  no-console: ['warn', { allow: ['warn', 'error'] }]
   import/namespace: [2, { allowComputed: true }]
-  no-unused-vars: ["error", { "ignoreRestSiblings": true }]
+  no-unused-vars: ['error', { 'ignoreRestSiblings': true }]
 
   # skip this rule if no prop-types
   'react/prop-types': [error, { skipUndeclared: true }]
@@ -47,38 +46,13 @@ rules:
   '@typescript-eslint/prefer-interface': off
   # for nextjs server.js
   '@typescript-eslint/no-var-requires': off
-  # whitelist those known non camelcase properties
-  "@typescript-eslint/camelcase":
-    - error
-    # NOTE: Please make sure you understand non-camelcase is unavoidable for whitelisted items
-    - allow: [
-      # SEO
-      "site_name",
-      # Data Tracking
-      "related_item_id", "share_option", "author_id", "item_position", "media_id", "opentalk_id",
-      "account_id", "option_id", "option_name", "hashtag_id", "item_type", "item_id",
-      "trigger_layer", "secondary_item_id", "tertiary_item_id",
-      # Comment SDK
-      "user_type",
-      # Report API
-      "complaint_source", "source_url",
-      # Image
-      "thumbnail_4_3",
-      # PRM API
-      "pua_name",
-      # Data Tracking Query Strings
-      "itm_source", "itm_medium", "itm_campaign",
-      # Share utm
-      "utm_source", "utm_medium"
-    ]
-
 
   # must not use current state to deduce next state, since react will manage state asynchronously
   react/no-access-state-in-setstate: error
   # must not use array index as key, it might cause unncessary render
   react/no-array-index-key: error
   # must define only one react component in a file for readability (ignore stateless components)
-  react/no-multi-comp: [error, { "ignoreStateless": true }]
+  react/no-multi-comp: [error, { 'ignoreStateless': true }]
   # must not use PureComponent with customized shouldComponentUpdate
   react/no-redundant-should-component-update: error
   # check common typos in react properties and liftcycle methods
@@ -97,20 +71,20 @@ rules:
     - error
     - order:
         [
-          "type-annotations",
-          "static-methods",
-          "instance-variables",
-          "lifecycle",
-          "/^handle.+$/",
-          "getters",
-          "setters",
-          "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
-          "instance-methods",
-          "everything-else",
-          "rendering",
+          'type-annotations',
+          'static-methods',
+          'instance-variables',
+          'lifecycle',
+          '/^handle.+$/',
+          'getters',
+          'setters',
+          '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
+          'instance-methods',
+          'everything-else',
+          'rendering',
         ]
       groups:
-        rendering: ["/^render.+$/", "render"]
+        rendering: ['/^render.+$/', 'render']
   # enforce `style` props be an object
   react/style-prop-object: error
   # void DOM element must not have children
@@ -140,11 +114,9 @@ rules:
   # disable no-callback-literal
   standard/no-callback-literal: 0
 
-  prettier/prettier: ["error", { endOfLine: "auto" }]
+  prettier/prettier: ['error', { endOfLine: 'auto' }]
 
   simple-import-sort/imports: error
   simple-import-sort/exports: error
   sort-imports: off
   import/order: off
-
-  unicorn/expiring-todo-comments: error
