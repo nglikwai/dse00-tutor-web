@@ -17,7 +17,7 @@ Before run this project, you need to install
 # to install dependencies
 > yarn
 
-# to start hot-reload dev environment, ready at localhost:3002
+# to start hot-reload dev environment, ready at localhost:3000
 > yarn dev
 
 # to deploy
