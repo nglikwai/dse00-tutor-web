@@ -13,7 +13,9 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <PageWrapper>body</PageWrapper>
+      <PageWrapper>
+        <h2>尋找補習老師</h2>
+      </PageWrapper>
     </div>
   )
 }

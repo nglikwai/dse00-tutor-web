@@ -22,6 +22,7 @@ const PageWrapper = (props: Props) => {
 }
 
 const Wrapper = styled.div`
+  font-family: “Helvetica Neue”, Helvetica, Arial, “PingFang HK”, 微软雅黑, “Microsoft YaHei”, 华文细黑, STHeiti, sans-serif;   
   background: #fffcf8;
   display: flex;
   flex-direction: column;
