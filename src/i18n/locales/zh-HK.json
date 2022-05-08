@@ -3,5 +3,17 @@
     "company_name": "DSE00",
     "product_name": "DSE00 Tutor",
     "description": "DSE00 Tutor是屬於DSE00的補習配對平台，用戶可以尋找合適導師或學生。"
+  },
+  "buttons": {
+    "search": "搜尋"
+  },
+  "components": {
+    "search": {
+      "basicSearch": {
+        "title": "尋找補習老師",
+        "place": "地點",
+        "subject": "科目"
+      }
+    }
   }
 }

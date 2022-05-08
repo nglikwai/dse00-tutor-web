@@ -30,7 +30,7 @@ settings:
 rules:
   no-console: ['warn', { allow: ['warn', 'error'] }]
   import/namespace: [2, { allowComputed: true }]
-  no-unused-vars: ['error', { 'ignoreRestSiblings': true }]
+  no-unused-vars: ['warn', { 'ignoreRestSiblings': true }]
 
   # skip this rule if no prop-types
   'react/prop-types': [error, { skipUndeclared: true }]

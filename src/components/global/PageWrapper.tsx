@@ -27,6 +27,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
+  font-family: “Helvetica Neue”, Helvetica, Arial, “PingFang HK”, 微软雅黑,
+    “Microsoft YaHei”, 华文细黑, STHeiti, sans-serif;
 `
 
 // https://stackoverflow.com/a/31835167
