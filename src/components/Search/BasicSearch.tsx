@@ -6,7 +6,10 @@ import Select from 'src/components/Select'
 import TutorList from 'src/components/TutorList'
 // import PATHNAME from 'src/constants/pathname'
 import { searchTutorRequest } from 'src/redux/search'
-import { isFetchingSelector, searchResultSelector } from 'src/redux/search/selectors'
+import {
+  isFetchingSelector,
+  searchResultSelector,
+} from 'src/redux/search/selectors'
 import styled from 'styled-components'
 
 // TODO: fetch from API
