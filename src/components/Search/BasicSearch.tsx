@@ -1,8 +1,12 @@
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import Select from 'src/components/Select'
-import PATHNAME from 'src/constants/pathname'
+import TutorList from 'src/components/TutorList'
+// import PATHNAME from 'src/constants/pathname'
+import { searchTutorRequest } from 'src/redux/search'
+import { isFetchingSelector, searchResultSelector } from 'src/redux/search/selectors'
 import styled from 'styled-components'
 
 // TODO: fetch from API
@@ -46,18 +50,28 @@ const subjects = [
 const BasicSearch = () => {
   const { t } = useTranslation()
 
-  const router = useRouter()
+  // const router = useRouter()
+
+  const dispatch = useDispatch()
+
+  const tutors = useSelector(searchResultSelector)
+
+  const isFetching = useSelector(isFetchingSelector)
 
   const [selectedPlace, setSelectedPlace] = useState(places[0])
 
   const [selectedSubject, setSelectedSubject] = useState(subjects[0])
 
   const handleOnSearch = useCallback(() => {
-    router.push({
-      pathname: PATHNAME.SEARCH_RESULT,
-      query: { place: selectedPlace, subject: selectedSubject },
-    })
-  }, [router, selectedPlace, selectedSubject])
+    // router.push({
+    //   pathname: PATHNAME.SEARCH_RESULT,
+    //   query: { place: selectedPlace, subject: selectedSubject },
+    // })
+
+    dispatch(
+      searchTutorRequest({ place: selectedPlace, subject: selectedSubject }),
+    )
+  }, [dispatch, selectedPlace, selectedSubject])
 
   const handleOnPlaceSelect = useCallback((selected: string) => {
     setSelectedPlace(selected)
@@ -90,6 +104,15 @@ const BasicSearch = () => {
           <span>{t('buttons.search')}</span>
         </Button>
       </Row>
+
+      {isFetching && <SearchResult>Searching...</SearchResult>}
+
+      {!!tutors.length && (
+        <SearchResult>
+          <h3>Search result:</h3>
+          <TutorList tutors={tutors.slice(0, 4)} />
+        </SearchResult>
+      )}
     </Wrapper>
   )
 }
@@ -119,6 +142,10 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`
+
+const SearchResult = styled.div`
+  margin-top: 24px;
 `
 
 export default BasicSearch

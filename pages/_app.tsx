@@ -3,7 +3,9 @@ import '../src/i18n'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import { Provider as ReduxProvider } from 'react-redux'
 import theme from 'src/constants/theme'
+import { store } from 'src/redux/store'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
@@ -24,9 +26,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ReduxProvider store={store}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ReduxProvider>
     </>
   )
 }
