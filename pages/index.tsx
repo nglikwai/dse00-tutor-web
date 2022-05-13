@@ -30,7 +30,19 @@ const Home: NextPage = (props: Props) => {
 
           <Section>
             <SectionTitle>
-              {t('components.tutorRecommendation.title')}
+              {t('components.tutorRecommendation.popular')}
+            </SectionTitle>
+            <TutorList tutors={recommendations} />
+          </Section>
+          <Section>
+            <SectionTitle>
+              {t('components.tutorRecommendation.economy')}
+            </SectionTitle>
+            <TutorList tutors={recommendations} />
+          </Section>
+          <Section>
+            <SectionTitle>
+              {t('components.tutorRecommendation.star')}
             </SectionTitle>
             <TutorList tutors={recommendations} />
           </Section>
@@ -46,7 +58,7 @@ const ContentWrapper = styled.div`
 `
 
 const Section = styled.div`
-  padding: 48px 0;
+  padding: 40px 0;
 `
 
 const SectionTitle = styled.h3`

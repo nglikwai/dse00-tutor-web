@@ -24,8 +24,8 @@ const Wrapper = styled.div`
   border: 1px solid rgb(221, 221, 221);
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 10px;
-  width: 150px;
+  padding: 10px 20px;
+  width: 170px;
 `
 
 const Avatar = styled.img`

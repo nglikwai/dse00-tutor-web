@@ -1,4 +1,7 @@
 // import { useRouter } from 'next/router'
+
+import 'bootstrap/dist/css/bootstrap.css'
+
 import Link from 'next/link'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -51,7 +54,7 @@ const subjects = [
   '中國歷史',
 ]
 
-const BasicSearch = () => {
+const SearchBar = () => {
   const { t } = useTranslation()
 
   // const router = useRouter()
@@ -87,9 +90,7 @@ const BasicSearch = () => {
 
   return (
     <Wrapper>
-      <Title>{t('components.search.basicSearch.title')}</Title>
-
-      <Row>
+      <SearchWrapper>
         <Select
           label={t('components.search.basicSearch.place')}
           options={places}
@@ -104,28 +105,49 @@ const BasicSearch = () => {
           onSelect={handleOnSubjectSelect}
         />
 
-        <Link href='/search'>
-          <SearchButtonWrapper>
-            <span>{t('buttons.search')}</span>
-          </SearchButtonWrapper>
-        </Link>
-      </Row>
+        <label>學費</label>
 
-      {isFetching && <SearchResult>Searching...</SearchResult>}
+        <Range type='range' className='range' min={50} max={300} />
+        <span className='price'>($180)</span>
+        <div className='genders'>
+          <input type='checkbox' value='男' className='check-box' />
+          <label id='m' className='gender'>
+            男
+          </label>
+          <input id='f' type='checkbox' value='女' className='check-box' />
+          <label className='gender'>女</label>
+        </div>
 
-      {!!tutors.length && (
+        <FilterButton>=</FilterButton>
+
+        <Button onClick={handleOnSearch}>
+          <span>{t('buttons.search')}</span>
+        </Button>
+      </SearchWrapper>
+
+      {/* {isFetching && (
         <SearchResult>
-          <h3>Search result:</h3>
-          <TutorList tutors={tutors.slice(0, 4)} />
+          <img src='Spinner.svg' />
         </SearchResult>
-      )}
+      )} */}
+
+      {/* {!!tutors.length && (
+        <SearchResult>
+          <h3>{t('components.search.basicSearch.result')}</h3>
+          <TutorList tutors={tutors.slice(0, 6)} />
+        </SearchResult>
+      )} */}
     </Wrapper>
   )
 }
-
-const Wrapper = styled.div`
-  padding: 70px 0;
+const SearchWrapper = styled.div`
+  border-bottom: 1px solid #eee;
+  padding: 30px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
+const Wrapper = styled.div``
 
 const Title = styled.h2`
   font-size: 24px;
@@ -138,8 +160,7 @@ const Row = styled.div`
     margin-right: 24px;
   }
 `
-
-const SearchButtonWrapper = styled.span`
+const Button = styled.button`
   background-color: #c00;
   border: none;
   border-radius: 24px;
@@ -156,4 +177,28 @@ const SearchResult = styled.div`
   margin-top: 24px;
 `
 
-export default BasicSearch
+const FilterButton = styled.button`
+  &:hover {
+    border: 1px #cc0000 solid;
+    color: #cc0000;
+  }
+  background-color: transparent;
+  color: #ccc;
+  border: 1px #aaa solid;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: 0.7s;
+`
+
+const Range = styled.input`
+  height: 10px;
+  width: 100px;
+  -webkit-appearance: none;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+`
+
+export default SearchBar
