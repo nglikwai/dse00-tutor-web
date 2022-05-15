@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { Tutor } from 'src/types'
 import styled from 'styled-components'
@@ -9,14 +10,16 @@ type Props = {
 const TutorCard = (props: Props) => {
   const { tutor } = props
   return (
-    <Wrapper>
-      <Avatar
-        src='https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
-        alt='Avatar of the tutor'
-      />
-      <Name>{tutor.name}</Name>
-      <Description>{tutor.intro}</Description>
-    </Wrapper>
+    <Link href='/tutor/1'>
+      <Wrapper>
+        <Avatar
+          src='https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
+          alt='Avatar of the tutor'
+        />
+        <Name>{tutor.name}</Name>
+        <Description>{tutor.intro}</Description>
+      </Wrapper>
+    </Link>
   )
 }
 

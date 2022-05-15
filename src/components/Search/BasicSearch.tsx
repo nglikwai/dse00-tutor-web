@@ -104,7 +104,7 @@ const BasicSearch = () => {
           onSelect={handleOnSubjectSelect}
         />
 
-        <Link href='/search'>
+        <Link href='/findtutor'>
           <SearchButtonWrapper>
             <span>{t('buttons.search')}</span>
           </SearchButtonWrapper>

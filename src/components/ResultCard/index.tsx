@@ -12,7 +12,7 @@ type Props = {
 const ResultCard = (props: Props) => {
   const { tutor } = props
   return (
-    <Link href={`/tutor`}>
+    <Link href={`/tutor/1`}>
       <ItemWrapper>
         <TutorIntro>
           <Avator />

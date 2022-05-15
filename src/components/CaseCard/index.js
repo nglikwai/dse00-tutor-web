@@ -15,7 +15,7 @@ import styled from 'styled-components'
 const ResultCard = () => {
   // const { tutor } = props
   return (
-    <Link href={`/case`}>
+    <Link href={`/case/1`}>
       <CaseWrapper>
         <Avator />
         <Item>
