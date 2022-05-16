@@ -12,17 +12,17 @@ import {
   isFetchingSelector,
   searchResultSelector,
 } from 'src/redux/search/selectors'
-import { Tutor } from 'src/types'
+import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 
 type Props = {
-  results: Tutor[]
+  cases: CaseUnit[]
 }
 
 const Cases: NextPage = (props: Props) => {
   const router = useRouter()
   const { query } = router
-  const { results } = props
+  const { cases } = props
   const { t } = useTranslation()
 
   // const router = useRouter()
@@ -55,18 +55,11 @@ const Cases: NextPage = (props: Props) => {
               <img src='Spinner.svg' />
             </div>
           )}
+          {cases.map(caseUnit => (
+            <CaseCard key={caseUnit.name} caseUnit={caseUnit}/>
 
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
-          <CaseCard />
+          ))}
+
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -77,5 +70,12 @@ const ContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `
+
+export async function getServerSideProps() {
+  const res = await fetch(`https://www.dse00.com/tutor/case`)
+  const cases = await res.json()
+
+  return { props: { cases } }
+}
 
 export default Cases

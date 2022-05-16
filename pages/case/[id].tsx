@@ -25,22 +25,23 @@ import {
   isFetchingSelector,
   searchResultSelector,
 } from 'src/redux/search/selectors'
-import { Tutor } from 'src/types'
+import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 
 type Props = {
-  results: Tutor[]
+  caseUnit: CaseUnit
 }
 
 const Cases: NextPage = (props: Props) => {
   const router = useRouter()
   const { query } = router
-  const { results } = props
+  const { caseUnit } = props
   const { t } = useTranslation()
-
   // const router = useRouter()
-
+  
+  
   const dispatch = useDispatch()
 
   const tutors = useSelector(searchResultSelector)
@@ -57,15 +58,15 @@ const Cases: NextPage = (props: Props) => {
       <PageWrapper>
         <ContentWrapper>
           <Header>
-            <ItemTitle>AA001 田家炳中三中文補習</ItemTitle>
-            <p>Tai Po 大埔</p>
+            <ItemTitle>A00{caseUnit.case} 田家炳中三{caseUnit.subject}補習</ItemTitle>
+            <p>{caseUnit.region}</p>
           </Header>
           <LowerWrapper>
             <LeftBarWrapper>
               <Brief>
                 <div>
-                  <ItemTitle>李同學的補習個案</ItemTitle>
-                  <p>中三，化學，女性</p>
+                  <ItemTitle>{caseUnit.name.substring(0,1)}同學的補習個案</ItemTitle>
+                  <p>中{caseUnit.form}，{caseUnit.subject}，{caseUnit.gender}</p>
                 </div>
                 <Avator />
               </Brief>
@@ -73,19 +74,19 @@ const Cases: NextPage = (props: Props) => {
                 <Item>
                   <FontAwesomeIcon icon={faCalendarAlt} color='#aaa' size='lg' />
                   <ItemInner>刊登時間
-                    <ItemText>20 May 2022</ItemText>
+                    <ItemText>{caseUnit.createdAt}</ItemText>
                   </ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon icon={faCalendarDay} color='#aaa' size='lg' />
                   <ItemInner>每星期堂數
-                    <ItemText>2 堂</ItemText>
+                    <ItemText>{caseUnit.lession} 堂</ItemText>
                   </ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon icon={faClockFour} color='#aaa' size='lg' />
                   <ItemInner>每堂時間
-                    <ItemText>2 小時</ItemText>
+                    <ItemText>{caseUnit.hour} 小時</ItemText>
                   </ItemInner>
                 </Item>
               </ItemsWrapper>
@@ -102,7 +103,7 @@ const Cases: NextPage = (props: Props) => {
           </LowerWrapper>
           <ItemsWrapper>
             <ItemTitle>補習地點</ItemTitle>
-            <p>Tai Po Center , 大埔中心</p>
+            <p>Tai Po Center , {caseUnit.building}</p>
             <Map/></ItemsWrapper>
           
         </ContentWrapper>
@@ -172,5 +173,14 @@ const ItemText = styled.span`
   font-size:14px;
 `
 
+const BackButton = styled(Link)`
+  background-color:#cc0000;
+`
+export async function getServerSideProps({query}) {
+  const res = await fetch(`https://www.dse00.com/tutor/case/${query.id}`)
+  const caseUnit = await res.json()
+
+  return { props: { caseUnit } }
+}
 
 export default Cases

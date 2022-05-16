@@ -10,29 +10,37 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React from 'react'
+import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 
-const ResultCard = () => {
-  // const { tutor } = props
+type Props = {
+  caseUnit: CaseUnit
+}
+
+const ResultCard = (props: Props) => {
+  const { caseUnit } = props
   return (
-    <Link href={`/case/1`}>
+    <Link href={`/case/${caseUnit._id}`}>
       <CaseWrapper>
         <Avator />
         <Item>
-          <FontAwesomeIcon icon={faBook} color='#cc0000' /> Chemistry
+          <FontAwesomeIcon icon={faBook} color='#cc0000' /> {caseUnit.subject}
         </Item>
         <Item>F.5 </Item>
         <Item>
-          <FontAwesomeIcon icon={faMarsDouble} color='#cc0000' /> 女
+          <FontAwesomeIcon icon={faMarsDouble} color='#cc0000' />{' '}
+          {caseUnit.gender}
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faLocation} color='#cc0000' /> 大埔
+          <FontAwesomeIcon icon={faLocation} color='#cc0000' />{' '}
+          {caseUnit.region}
         </Item>
         <Item>
           <FontAwesomeIcon icon={faSchool} color='#cc0000' /> 田家炳{' '}
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faSackDollar} color='#cc0000' /> <b> $180</b>
+          <FontAwesomeIcon icon={faSackDollar} color='#cc0000' />{' '}
+          <b> ${caseUnit.price}</b>
         </Item>
         <Item>
           <FontAwesomeIcon icon={faPlus} color='#cc0000' />
