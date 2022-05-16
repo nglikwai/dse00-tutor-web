@@ -52,7 +52,8 @@ const Avator = styled.div`
 
 const Name = styled.h3`
   color: #aa0000;
-  text-shadow: 1px 1px 5px rgb(253, 181, 181);
+  text-shadow: 1px 1px 2px rgb(253, 181, 181);
+  margin-bottom: 16px;
 `
 
 const TutorIntro = styled.div`
@@ -66,7 +67,7 @@ const IntroWrapper = styled.div`
 const ItemWrapper = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
-  width: 670px;
+  width: 900px;
   padding: 30px 40px 10px 40px;
   margin: 20px;
   transition: 0.5s;
@@ -77,14 +78,15 @@ const DetailsWrapper = styled.div`
 `
 
 const FeeWrapper = styled.div`
-  margin: 10px;
+  margin: 0;
 `
 
 const List = styled.li`
   &:hover {
     background-color: rgb(255, 224, 224);
   }
-  margin-bottom: 10px;
+  border: none;
+  margin: 0px 0 10px 10px;
   padding: 5px 16px;
   list-style-type: none;
   background-color: rgb(255, 241, 241);

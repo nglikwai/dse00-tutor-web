@@ -2,9 +2,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 import * as R from 'ramda'
 import React from 'react'
+import Footer from 'src/components/global/Footer'
+import Header from 'src/components/global/Header'
 import styled from 'styled-components'
-
-import Header from './Header'
 type Props = {
   children: React.ReactNode
 }
@@ -17,6 +17,7 @@ const PageWrapper = (props: Props) => {
       <InnerWrapper>
         <Header />
         <ContentWrapper withTopPadding>{children}</ContentWrapper>
+        <Footer />
       </InnerWrapper>
     </Wrapper>
   )

@@ -6,7 +6,9 @@ export type Theme = {
   palette: {
     mainTheme: ThemeStyle
   }
+  width: string
   fontSizes: string[]
+  fontColor: string
   fontFamily: string
 }
 
@@ -14,7 +16,9 @@ const theme: Theme = {
   palette: {
     mainTheme: '#cc0000',
   },
+  width: '1200px',
   fontSizes: ['14px', '18px', '22px'],
+  fontColor: '#444',
   fontFamily:
     '"PingFang HK", PingFang-HK, PingFangHK, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif',
 }

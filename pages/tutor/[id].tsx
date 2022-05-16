@@ -1,24 +1,19 @@
-import type { NextPage } from 'next'
 import {
-  faBook,
-  faHeart,
-  faLocation,
-  faMarsDouble,
-  faCalendarDay,
-  faSackDollar,
   faCalendarAlt,
+  faCalendarDay,
   faClockFour,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Calendar from 'src/components/Calendar'
-import ReserveForm from 'src/components/ReserveForm'
-import Map from 'src/components/Map/index'
 import PageWrapper from 'src/components/global/PageWrapper'
+import Map from 'src/components/Map/index'
+import ReserveForm from 'src/components/ReserveForm'
 import BasicSearch from 'src/components/Search/BasicSearch'
 import { searchTutorRequest } from 'src/redux/search'
 import {
@@ -27,7 +22,6 @@ import {
 } from 'src/redux/search/selectors'
 import { Tutor } from 'src/types'
 import styled from 'styled-components'
-
 
 type Props = {
   results: Tutor[]
@@ -71,40 +65,53 @@ const Cases: NextPage = (props: Props) => {
               </Brief>
               <ItemsWrapper>
                 <Item>
-                  <FontAwesomeIcon icon={faCalendarAlt} color='#aaa' size='lg' />
-                  <ItemInner>刊登時間
+                  <FontAwesomeIcon
+                    icon={faCalendarAlt}
+                    color='#aaa'
+                    size='lg'
+                  />
+                  <ItemInner>
+                    刊登時間
                     <ItemText>20 May 2022</ItemText>
                   </ItemInner>
                 </Item>
                 <Item>
-                  <FontAwesomeIcon icon={faCalendarDay} color='#aaa' size='lg' />
-                  <ItemInner>每星期堂數
+                  <FontAwesomeIcon
+                    icon={faCalendarDay}
+                    color='#aaa'
+                    size='lg'
+                  />
+                  <ItemInner>
+                    每星期堂數
                     <ItemText>2 堂</ItemText>
                   </ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon icon={faClockFour} color='#aaa' size='lg' />
-                  <ItemInner>每堂時間
+                  <ItemInner>
+                    每堂時間
                     <ItemText>2 小時</ItemText>
                   </ItemInner>
                 </Item>
               </ItemsWrapper>
               <ItemsWrapper>
-                <ItemTitle>選擇你開始的日期<ItemText>2022年5月22日</ItemText></ItemTitle>
-                
-                <Calendar/>
+                <ItemTitle>
+                  選擇你開始的日期<ItemText>2022年5月22日</ItemText>
+                </ItemTitle>
+
+                <Calendar />
               </ItemsWrapper>
             </LeftBarWrapper>
 
             <RightBarWrapper>
-            <ReserveForm/>
+              <ReserveForm />
             </RightBarWrapper>
           </LowerWrapper>
           <ItemsWrapper>
             <ItemTitle>補習地點</ItemTitle>
             <p>Tai Po Center , 大埔中心</p>
-            <Map/></ItemsWrapper>
-          
+            <Map />
+          </ItemsWrapper>
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -114,7 +121,7 @@ const Header = styled.div`
   padding: 30px 0;
 `
 const ContentWrapper = styled.div`
-  max-width: 1200px;
+  max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
 `
 
@@ -123,12 +130,10 @@ const LowerWrapper = styled.div`
 `
 
 const LeftBarWrapper = styled.div`
-width:800px;
-padding:10px 60px 0 0;
+  width: 800px;
+  padding: 10px 60px 0 0;
 `
-const RightBarWrapper = styled.div`
-
-`
+const RightBarWrapper = styled.div``
 
 const Avator = styled.div`
   border-radius: 50%;
@@ -143,34 +148,31 @@ const Avator = styled.div`
 
 const Brief = styled.div`
   display: flex;
-  padding:0 0 20px 0;
+  padding: 0 0 20px 0;
   justify-content: space-between;
-  border-bottom:1px solid #ccc;
-
+  border-bottom: 1px solid #ccc;
 `
 
 const ItemsWrapper = styled.div`
-  padding:20px 0;
-  border-bottom:1px solid #ccc;
-
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
 `
 
 const Item = styled.div`
-display:flex;
-  padding:10px 0 
+  display: flex;
+  padding: 10px 0;
 `
 const ItemTitle = styled.h4`
   padding: 20px 0;
-  font-weight:bold;
+  font-weight: bold;
 `
 const ItemInner = styled.div`
-padding: 0 12px;
+  padding: 0 12px;
 `
 const ItemText = styled.span`
-  display:block;
-  color:#bbb;
-  font-size:14px;
+  display: block;
+  color: #bbb;
+  font-size: 14px;
 `
-
 
 export default Cases

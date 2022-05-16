@@ -55,11 +55,9 @@ const Cases: NextPage = (props: Props) => {
               <img src='Spinner.svg' />
             </div>
           )}
-          {cases.map(caseUnit => (
-            <CaseCard key={caseUnit.name} caseUnit={caseUnit}/>
-
+          {cases.map((caseUnit) => (
+            <CaseCard key={caseUnit.name} caseUnit={caseUnit} />
           ))}
-
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -67,7 +65,7 @@ const Cases: NextPage = (props: Props) => {
 }
 
 const ContentWrapper = styled.div`
-  max-width: 1200px;
+  max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
 `
 

@@ -1,7 +1,12 @@
 // import { useRouter } from 'next/router'
-
 import 'bootstrap/dist/css/bootstrap.css'
 
+import {
+  faBars,
+  faMagnifyingGlass,
+  faMars,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -109,19 +114,19 @@ const SearchBar = () => {
 
         <Range type='range' className='range' min={50} max={300} />
         <span className='price'>($180)</span>
-        <div className='genders'>
-          <input type='checkbox' value='男' className='check-box' />
-          <label id='m' className='gender'>
-            男
-          </label>
-          <input id='f' type='checkbox' value='女' className='check-box' />
-          <label className='gender'>女</label>
+        <div>
+          <Button onClick={handleOnSearch}>
+            <FontAwesomeIcon icon={faMars} color='white' size='lg' />
+            <span style={{ padding: '0 0 0 10px' }}>女性</span>
+          </Button>
         </div>
 
-        <FilterButton>=</FilterButton>
+        <FilterButton>
+          <FontAwesomeIcon icon={faBars} color='grey' size='lg' />
+        </FilterButton>
 
         <Button onClick={handleOnSearch}>
-          <span>{t('buttons.search')}</span>
+          <FontAwesomeIcon icon={faMagnifyingGlass} color='white' size='lg' />
         </Button>
       </SearchWrapper>
 
@@ -141,8 +146,7 @@ const SearchBar = () => {
   )
 }
 const SearchWrapper = styled.div`
-  border-bottom: 1px solid #eee;
-  padding: 30px 50px;
+  padding: 20px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -166,7 +170,7 @@ const Button = styled.button`
   border-radius: 24px;
   color: #fff;
   font-size: 16px;
-  padding: 4px 20px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,6 +186,7 @@ const FilterButton = styled.button`
     border: 1px #cc0000 solid;
     color: #cc0000;
   }
+  padding: 4px 8px;
   background-color: transparent;
   color: #ccc;
   border: 1px #aaa solid;

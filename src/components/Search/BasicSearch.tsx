@@ -1,4 +1,6 @@
 // import { useRouter } from 'next/router'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -87,8 +89,6 @@ const BasicSearch = () => {
 
   return (
     <Wrapper>
-      <Title>{t('components.search.basicSearch.title')}</Title>
-
       <Row>
         <Select
           label={t('components.search.basicSearch.place')}
@@ -106,7 +106,7 @@ const BasicSearch = () => {
 
         <Link href='/findtutor'>
           <SearchButtonWrapper>
-            <span>{t('buttons.search')}</span>
+            <FontAwesomeIcon icon={faMagnifyingGlass} color='white' size='lg' />
           </SearchButtonWrapper>
         </Link>
       </Row>
@@ -124,16 +124,20 @@ const BasicSearch = () => {
 }
 
 const Wrapper = styled.div`
-  padding: 70px 0;
-`
-
-const Title = styled.h2`
-  font-size: 24px;
+  padding: 20px 0;
 `
 
 const Row = styled.div`
   display: flex;
-
+  border: 1px solid #ccc;
+  background: white;
+  width: 440px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 1px 8px #ddd;
+  padding: 4px 0;
+  margin: 0 0 0 0;
   > *:not(:last-child) {
     margin-right: 24px;
   }
@@ -145,7 +149,7 @@ const SearchButtonWrapper = styled.span`
   border-radius: 24px;
   color: #fff;
   font-size: 16px;
-  padding: 4px 20px;
+  padding: 4px 12px;
   display: flex;
   align-items: center;
   justify-content: center;

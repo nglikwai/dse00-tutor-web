@@ -22,7 +22,9 @@ const ResultCard = (props: Props) => {
   return (
     <Link href={`/case/${caseUnit._id}`}>
       <CaseWrapper>
-        <Avator />
+        <Item>
+          <Avator />
+        </Item>
         <Item>
           <FontAwesomeIcon icon={faBook} color='#cc0000' /> {caseUnit.subject}
         </Item>
@@ -66,7 +68,7 @@ const Avator = styled.div`
 `
 
 const Item = styled.div`
-  margin: 0 80px 0 0;
+  width: 160px;
 `
 const CaseWrapper = styled.div`
   background-color: #fff9e9;

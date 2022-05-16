@@ -107,7 +107,10 @@ const Search: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <SearchBar />
+          <Float>
+            <SearchBar />
+          </Float>
+
           <div>
             <span>{t('components.search.basicSearch.place')}: </span>
             <span>{query.place ?? ''}</span>
@@ -130,9 +133,16 @@ const Search: NextPage = (props: Props) => {
     </div>
   )
 }
-
+const Float = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background-color: #fffcf8;
+  margin: 0 0 10px 0;
+`
 const ContentWrapper = styled.div`
-  max-width: 1200px;
+  max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
 `
 

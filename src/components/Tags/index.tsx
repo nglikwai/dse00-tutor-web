@@ -23,7 +23,7 @@ const Tags = (props: Props) => {
 
 const Tag = styled.button`
   margin: 5px 2px;
-  font-size: 12px;
+  font-size: 13px;
   border: none;
   background-color: #cc0000;
   color: white;
