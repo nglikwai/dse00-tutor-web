@@ -12,6 +12,7 @@ type Props = {
 const PageWrapper = (props: Props) => {
   const { children, ...restProps } = props
 
+  // edited
   return (
     <Wrapper {...restProps}>
       <InnerWrapper>
