@@ -24,7 +24,6 @@ const ResultCard = (props: Props) => {
       <CaseWrapper>
         <Item>
           <Avator />
-          <Avator />
         </Item>
         <Item>
           <FontAwesomeIcon icon={faBook} color='#cc0000' /> {caseUnit.subject}
