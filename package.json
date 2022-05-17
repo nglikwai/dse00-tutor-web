@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "eslint": "eslint --ext .tsx,.ts,.js . --fix",
+    "eslint": "eslint --ext .tsx,.ts,.js .",
     "lint": "tsc && yarn eslint",
     "prepare": "husky install"
   },
