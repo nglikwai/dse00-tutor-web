@@ -1,6 +1,7 @@
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import { LogoJsonLd } from 'next-seo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import PATHNAME from 'src/constants/pathname'
@@ -8,6 +9,10 @@ import styled from 'styled-components'
 
 const Header = () => {
   const { t } = useTranslation()
+
+  const LoginButtonOnClick = () => {
+    alert('hi')
+  }
 
   return (
     <OuterWrapper>
@@ -23,10 +28,17 @@ const Header = () => {
             <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
           </StyledLink>
         </LeftWrapper>
-        <LoginWrapper>
-          <FontAwesomeIcon icon={faBars} color='white' />
-          <FontAwesomeIcon icon={faUser} />
-        </LoginWrapper>
+        <RightWrapper>
+          <LoginWrapper onClick={LoginButtonOnClick}>
+            <FontAwesomeIcon icon={faBars} color='white' />
+            <FontAwesomeIcon icon={faUser} />
+          </LoginWrapper>
+          <LoginMenu id='login-menu'>
+            <LoginMenuItem>Login</LoginMenuItem>
+            <LoginMenuItem>Register</LoginMenuItem>
+            <LoginMenuItem>語言：中文</LoginMenuItem>
+          </LoginMenu>
+        </RightWrapper>
       </Wrapper>
     </OuterWrapper>
   )
@@ -46,6 +58,12 @@ const Wrapper = styled.div`
 `
 
 const LeftWrapper = styled.div``
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`
 const LoginWrapper = styled.div`
   &:hover {
     box-shadow: 0 0px 20px white;
@@ -58,6 +76,24 @@ const LoginWrapper = styled.div`
   width: 70px;
   display: flex;
   justify-content: space-between;
+`
+const LoginMenu = styled.div`
+  position: absolute;
+  top: 68px;
+  z-index: 10;
+`
+const LoginMenuItem = styled.div`
+  &:hover {
+    background-color: #eee;
+  }
+  background-color: white;
+  color: #656565;
+  padding: 8px 20px;
+  margin: 8px 0;
+  box-shadow: 0 4px 4px #eee;
+  border-radius: 1.5rem;
+  transition: 0.4s;
+  cursor: pointer;
 `
 
 const LogoWrapper = styled.span`
