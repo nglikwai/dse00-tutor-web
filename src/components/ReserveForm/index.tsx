@@ -1,12 +1,40 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ComfirmForm from 'src/components/ConfirmForm'
+import { toggleConfirmPageOpen, toggleLoginPageOpen } from 'src/redux/page'
+import { StatusState } from 'src/redux/page/types'
+import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 
-const ReserveForm = () => {
+type Props = {
+  caseUnit: CaseUnit
+}
+
+const ReserveForm = (props: Props) => {
+  const dispatch = useDispatch()
+  const { caseUnit } = props
+  const { confirmPage, login } = useSelector(
+    (state: StatusState) => state.pageStatus,
+  )
+  const { reserveNumber } = useSelector((state: StatusState) => state.user)
+
+  let reserved = false
+
+  if (reserveNumber.includes(caseUnit.case) && login) {
+    reserved = true
+  }
   return (
     <Wrapper>
       <h4>$180 / 小時</h4>
       <Input type='number' placeholder='聯絡電話' />
-      <ReserveButton>預約學生</ReserveButton>
+      <ReserveButton
+        color={reserved ? 'green' : '#cc0000'}
+        onClick={() =>
+          dispatch(login ? toggleConfirmPageOpen() : toggleLoginPageOpen())
+        }
+      >
+        {reserved ? '已預約' : '預約學生'}
+      </ReserveButton>
       <ItemsWrapper>
         <Item>
           <span>每堂時數</span>
@@ -29,6 +57,12 @@ const ReserveForm = () => {
         <span>上堂地址</span>
         <span>導家提供場地</span>
       </Item>
+      {confirmPage && (
+        <ModalWrapper>
+          <ComfirmForm caseUnit={caseUnit} />
+          {/* <Close onClick={() => dispatch(toggleLoginPageOpen())}>X</Close> */}
+        </ModalWrapper>
+      )}
     </Wrapper>
   )
 }
@@ -52,9 +86,9 @@ const Input = styled.input`
 
 const ReserveButton = styled.button`
   &:hover {
-    background-color: #dd0000;
+    background-color: #ff0000;
   }
-  background-color: #cc0000;
+  background-color: ${(props) => (props.color ? props.color : '#cc0000')};
   border: none;
   border-radius: 10px;
   height: 40px;
@@ -74,4 +108,18 @@ const Item = styled.div`
   justify-content: space-between;
   padding: 4px 0;
 `
+const ModalWrapper = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -10%;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`
+
 export default ReserveForm

@@ -1,9 +1,0 @@
-.disappear{
-  display:none
-}
-
-#login-menu{
-  position:absolute;
-  top:68px;
-  z-index:10;
-}

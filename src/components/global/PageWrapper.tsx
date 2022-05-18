@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
+import { env } from 'process'
 import * as R from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,7 +37,7 @@ const PageWrapper = (props: Props) => {
 }
 
 const Wrapper = styled.div`
-  background: #fffcf8;
+  background: ${({ theme }) => theme.palette.backgroundColor};
   display: flex;
   flex-direction: column;
   padding-bottom: constant(safe-area-inset-bottom);

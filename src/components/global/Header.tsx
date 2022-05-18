@@ -2,34 +2,21 @@ import Link from 'next/link'
 import { LogoJsonLd } from 'next-seo'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import Dropdown from 'src/components/Dropdown'
 import Login from 'src/components/Login'
 import PATHNAME from 'src/constants/pathname'
+import { toggleLoginPageOpen } from 'src/redux/page'
+import { toggleOpenPageSelector } from 'src/redux/page/selectors'
+import { StatusState } from 'src/redux/page/types'
 import styled from 'styled-components'
 
-const options = [
-  {
-    label: 'The Color Red',
-    value: 'red',
-  },
-  {
-    label: 'The Color Green',
-    value: 'green',
-  },
-  {
-    label: 'A Shade of Blue',
-    value: 'blue',
-  },
-]
-
 const Header = () => {
-  const [login, setLogin] = useState(false)
+  const dispatch = useDispatch()
+  const { loginPage } = useSelector((state: StatusState) => state.pageStatus)
 
   const { t } = useTranslation()
 
-  const LoginModalOpen = () => {
-    setLogin(!login)
-  }
   return (
     <OuterWrapper>
       <Wrapper>
@@ -45,12 +32,12 @@ const Header = () => {
           </StyledLink>
         </LeftWrapper>
         <RightWrapper>
-          <Dropdown onClick={LoginModalOpen} />
+          <Dropdown />
         </RightWrapper>
       </Wrapper>
-      {login && (
+      {loginPage === true && (
         <ModalWrapper>
-          <Close onClick={LoginModalOpen}>X</Close>
+          <Close onClick={() => dispatch(toggleLoginPageOpen())}>X</Close>
           <Login />
         </ModalWrapper>
       )}
@@ -59,9 +46,11 @@ const Header = () => {
 }
 const OuterWrapper = styled.div`
   background: ${({ theme }) => theme.palette.mainTheme};
+  box-shadow: 0 0 4px #bbb;
   width: 100%;
   display: flex;
   justify-content: center;
+  transition: 0.5s;
 `
 const Wrapper = styled.div`
   color: #fff;
@@ -80,6 +69,9 @@ const RightWrapper = styled.div`
 `
 
 const LogoWrapper = styled.span`
+  &:hover {
+    text-shadow: 0 0 20px #fff;
+  }
   transition: 0.4s;
   font-size: 20px;
   cursor: pointer;
@@ -88,6 +80,9 @@ const LogoWrapper = styled.span`
 `
 
 const LinkWrapper = styled.span`
+  &:hover {
+    text-shadow: 0 0 20px #fff;
+  }
   transition: 0.4s;
   font-size: 18px;
   cursor: pointer;

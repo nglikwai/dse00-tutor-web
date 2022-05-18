@@ -1,45 +1,25 @@
 import {
-  faCalendarAlt,
-  faCalendarDay,
-  faClockFour,
+  faBook,
+  faBookBookmark,
+  faCheck,
+  faHouse,
+  faShieldAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import * as R from 'ramda'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import Calendar from 'src/components/Calendar'
+import Comment from 'src/components/Comment'
 import PageWrapper from 'src/components/global/PageWrapper'
-import Map from 'src/components/Map/index'
-import ReserveForm from 'src/components/ReserveForm'
-import BasicSearch from 'src/components/Search/BasicSearch'
-import { searchTutorRequest } from 'src/redux/search'
-import {
-  isFetchingSelector,
-  searchResultSelector,
-} from 'src/redux/search/selectors'
-import { Tutor } from 'src/types'
 import styled from 'styled-components'
 
-type Props = {
-  results: Tutor[]
-}
-
-const Cases: NextPage = (props: Props) => {
-  const router = useRouter()
-  const { query } = router
-  const { results } = props
+const Cases: NextPage = () => {
   const { t } = useTranslation()
 
   // const router = useRouter()
-
-  const dispatch = useDispatch()
-
-  const tutors = useSelector(searchResultSelector)
-
-  const isFetching = useSelector(isFetchingSelector)
 
   return (
     <div>
@@ -50,68 +30,77 @@ const Cases: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <Header>
-            <ItemTitle>AA001 陳老師</ItemTitle>
-            <p>Tai Po 大埔</p>
-          </Header>
-          <LowerWrapper>
+          <Wrapper>
             <LeftBarWrapper>
+              <Avator />
+              <ItemTitle>
+                <FontAwesomeIcon icon={faShieldAlt} color='#444' size='lg' />
+                <ItemInner>已驗證</ItemInner>
+              </ItemTitle>
+              <Item>
+                <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
+                <ItemInner>電話號碼</ItemInner>
+              </Item>
+              <Item>
+                <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
+                <ItemInner>考試證書</ItemInner>
+              </Item>
+            </LeftBarWrapper>
+            <RightBarWrapper>
+              <Header>
+                <ItemTitle>
+                  你好，我是陳加文老師 <ItemText>自 05-05-2022 加入</ItemText>
+                </ItemTitle>
+              </Header>
+
               <Brief>
                 <div>
-                  <ItemTitle>李同學的補習個案</ItemTitle>
-                  <p>中三，化學，女性</p>
+                  <ItemTitle>關於陳老師</ItemTitle>
+                  <p>
+                    I Søren Sarup (born 1975) lives in Aarhus, Fanø and Agger. I
+                    am an independent Danish architect that works professionally
+                    with planning and design of all building types, with a
+                    passionated focus on vacation-homes, nature hotels and
+                    Boutique hotels.
+                  </p>
                 </div>
-                <Avator />
               </Brief>
               <ItemsWrapper>
                 <Item>
-                  <FontAwesomeIcon
-                    icon={faCalendarAlt}
-                    color='#aaa'
-                    size='lg'
-                  />
-                  <ItemInner>
-                    刊登時間
-                    <ItemText>20 May 2022</ItemText>
-                  </ItemInner>
+                  <FontAwesomeIcon icon={faHouse} color='#555' size='lg' />
+                  <ItemInner>住在大埔</ItemInner>
+                </Item>
+                <Item>
+                  <FontAwesomeIcon icon={faBook} color='#555' size='lg' />
+                  <ItemInner>教授化學、生物</ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon
-                    icon={faCalendarDay}
-                    color='#aaa'
+                    icon={faBookBookmark}
+                    color='#555'
                     size='lg'
                   />
-                  <ItemInner>
-                    每星期堂數
-                    <ItemText>2 堂</ItemText>
-                  </ItemInner>
-                </Item>
-                <Item>
-                  <FontAwesomeIcon icon={faClockFour} color='#aaa' size='lg' />
-                  <ItemInner>
-                    每堂時間
-                    <ItemText>2 小時</ItemText>
-                  </ItemInner>
+                  <ItemInner>就讀香港中文大學</ItemInner>
                 </Item>
               </ItemsWrapper>
               <ItemsWrapper>
-                <ItemTitle>
-                  選擇你開始的日期<ItemText>2022年5月22日</ItemText>
-                </ItemTitle>
-
-                <Calendar />
+                <ItemTitle>課堂筆記</ItemTitle>
+                <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
+                <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
               </ItemsWrapper>
-            </LeftBarWrapper>
-
-            <RightBarWrapper>
-              <ReserveForm />
+              <ItemsWrapper>
+                <ItemTitle>學生留言</ItemTitle>
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <MoreButton>更多留言</MoreButton>
+              </ItemsWrapper>
             </RightBarWrapper>
-          </LowerWrapper>
-          <ItemsWrapper>
-            <ItemTitle>補習地點</ItemTitle>
-            <p>Tai Po Center , 大埔中心</p>
-            <Map />
-          </ItemsWrapper>
+          </Wrapper>
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -123,23 +112,38 @@ const Header = styled.div`
 const ContentWrapper = styled.div`
   max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
 `
 
-const LowerWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `
 
 const LeftBarWrapper = styled.div`
-  width: 800px;
-  padding: 10px 60px 0 0;
+  width: 300px;
+  height: 400px;
+  padding: 30px;
+  margin: 60px;
+  border: 1px #ddd solid;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
-const RightBarWrapper = styled.div``
+const RightBarWrapper = styled.div`
+  padding: 0 20px;
+  margin: 20px 0;
+  width: 700px;
+`
 
-const Avator = styled.div`
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  background-size: cover;
+const Avator = styled((props) => (
+  <div {...R.omit(['withTopPadding'], props)} />
+))`
+  width: ${(props) => (props.width ? props.width : '100%')};
+  height: ${(props) => (props.width ? props.height : '160px')};
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png');
@@ -157,6 +161,12 @@ const ItemsWrapper = styled.div`
   padding: 20px 0;
   border-bottom: 1px solid #ccc;
 `
+const Notes = styled.img`
+  width: 300px;
+  height: 200px;
+  border-radius: 1rem;
+  margin: 0 20px 0 0;
+`
 
 const Item = styled.div`
   display: flex;
@@ -166,13 +176,22 @@ const ItemTitle = styled.h4`
   padding: 20px 0;
   font-weight: bold;
 `
-const ItemInner = styled.div`
+const ItemInner = styled.span`
   padding: 0 12px;
 `
 const ItemText = styled.span`
   display: block;
   color: #bbb;
   font-size: 14px;
+`
+
+const MoreButton = styled.button`
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px 50px;
+  margin: 0 0 50px 0;
+  color: #444;
+  border: 1px solid #444;
 `
 
 export default Cases

@@ -1,3 +1,6 @@
+import 'react-dates/initialize'
+import 'react-dates/lib/css/_datepicker.css'
+
 import {
   faCalendarAlt,
   faCalendarDay,
@@ -8,19 +11,17 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
+import {
+  DayPicker,
+  DayPickerRangeController,
+  SingleDatePicker,
+} from 'react-dates'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import Calendar from 'src/components/Calendar'
 import PageWrapper from 'src/components/global/PageWrapper'
 import Map from 'src/components/Map/index'
 import ReserveForm from 'src/components/ReserveForm'
-import BasicSearch from 'src/components/Search/BasicSearch'
-import { searchTutorRequest } from 'src/redux/search'
-import {
-  isFetchingSelector,
-  searchResultSelector,
-} from 'src/redux/search/selectors'
 import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 
@@ -34,12 +35,6 @@ const Cases: NextPage = (props: Props) => {
   const { caseUnit } = props
   const { t } = useTranslation()
   // const router = useRouter()
-
-  const dispatch = useDispatch()
-
-  const tutors = useSelector(searchResultSelector)
-
-  const isFetching = useSelector(isFetchingSelector)
 
   return (
     <div>
@@ -105,12 +100,12 @@ const Cases: NextPage = (props: Props) => {
                   選擇你開始的日期<ItemText>2022年5月22日</ItemText>
                 </ItemTitle>
 
-                <Calendar />
+                <DayPicker />
               </ItemsWrapper>
             </LeftBarWrapper>
 
             <RightBarWrapper>
-              <ReserveForm />
+              <ReserveForm caseUnit={caseUnit} />
             </RightBarWrapper>
           </LowerWrapper>
           <ItemsWrapper>
