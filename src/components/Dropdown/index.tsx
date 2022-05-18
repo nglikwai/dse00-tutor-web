@@ -1,33 +1,38 @@
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleLoginButtonOpen } from 'src/redux/page'
 import styled from 'styled-components'
 
 type Props = {
   onClick: () => void
 }
 
-const Dropdown = (props: Props) => {
-  const [open, setOpen] = useState(false)
-
-  const ButtonOnClick = () => {
-    setOpen(!open)
+type StatusState = {
+  pageStatus: {
+    open: boolean
   }
+}
+
+const Dropdown = (props: Props) => {
+  const dispatch = useDispatch()
+  const { open } = useSelector((state: StatusState) => state.pageStatus)
 
   const LoginButtonOnClick = () => {
     props.onClick()
-    ButtonOnClick()
+    dispatch(toggleLoginButtonOpen())
   }
 
   return (
-    <>
-      <Wrapper onClick={ButtonOnClick}>
+    <Wrapper>
+      <ButtonWrapper onClick={() => dispatch(toggleLoginButtonOpen())}>
         <FontAwesomeIcon icon={faBars} color='white' />
         <FontAwesomeIcon icon={faUser} />
-      </Wrapper>
+      </ButtonWrapper>
       {open === true && (
-        <Menu id='-menu'>
+        <Menu>
           <MenuItem onClick={LoginButtonOnClick}>Login</MenuItem>
 
           <Link href='/'>
@@ -38,11 +43,11 @@ const Dropdown = (props: Props) => {
           </Link>
         </Menu>
       )}
-    </>
+    </Wrapper>
   )
 }
-
-const Wrapper = styled.div`
+const Wrapper = styled.div``
+const ButtonWrapper = styled.div`
   &:hover {
     box-shadow: 0 0px 20px white;
   }
@@ -57,6 +62,10 @@ const Wrapper = styled.div`
 `
 const Menu = styled.div`
   position: absolute;
+  background-color: rgba(256, 256, 256, 0.6);
+  height: 160px;
+  padding: 0 4px;
+  border-radius: 1rem;
   top: 60px;
   z-index: 10;
 `

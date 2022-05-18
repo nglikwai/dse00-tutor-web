@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -33,13 +34,15 @@ const Input = styled.input`
   border: 1px solid #ddd;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled((props) => (
+  <button {...R.omit(['withTopPadding'], props)} />
+))`
   padding: 10px 20px;
   width: 90%;
   margin: 20px 0;
   border-radius: 1rem;
   border: 1px solid #ddd;
-  background: ${(props) => props.color};
+  background: ${(props) => (props.color ? props.color : '#eee')};
   color: ${(props) => (props.primary ? 'black' : 'white')};
 `
 
