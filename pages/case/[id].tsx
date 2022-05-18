@@ -184,7 +184,10 @@ const ItemText = styled.span`
 const BackButton = styled(Link)`
   background-color: #cc0000;
 `
-export async function getServerSideProps({ query }) {
+type QueryProps = {
+  query: { id: string }
+}
+export async function getServerSideProps({ query }: QueryProps) {
   const res = await fetch(`https://www.dse00.com/tutor/case/${query.id}`)
   const caseUnit = await res.json()
 
