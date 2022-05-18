@@ -138,7 +138,7 @@ const Float = styled.div`
   border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
-  background-color: #fffcf8;
+  background-color: ${({ theme }) => theme.palette.backgroundColor};
   margin: 0 0 10px 0;
 `
 const ContentWrapper = styled.div`

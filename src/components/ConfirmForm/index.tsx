@@ -1,30 +1,39 @@
 import Router from 'next/router'
 import * as R from 'ramda'
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { setLogin, toggleLoginPageOpen } from 'src/redux/page'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleConfirmPageOpen } from 'src/redux/page'
+import { StatusState } from 'src/redux/page/types'
+import user, { confirmReserve } from 'src/redux/user'
+import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
+type Props = {
+  caseUnit: CaseUnit
+}
 
-const Login = () => {
+const ConfirmForm = (props: Props) => {
+  const { caseUnit } = props
   const dispatch = useDispatch()
+  const { confirmPage } = useSelector((state: StatusState) => state.pageStatus)
+  const { reserveNumber } = useSelector((state: StatusState) => state.user)
 
   const loginHandler = () => {
-    dispatch(setLogin())
-    dispatch(toggleLoginPageOpen())
+    dispatch(toggleConfirmPageOpen())
+    dispatch(confirmReserve(caseUnit.case))
   }
   return (
     <Wrapper>
-      <Title>Log in or sign up</Title>
-      <Welcome>Welcome to DSE00 Tutor</Welcome>
-      <Input placeholder='username' type='text' />
-      <Input placeholder='password' type='password' />
-      <SubmitButton color={'#cc0000'} onClick={loginHandler}>
-        Continue
+      <Title />
+      <Welcome>{`${caseUnit.case} : ${caseUnit.name}同學${caseUnit.subject}的補習個案`}</Welcome>
+      <Item>最快開始日期 ： 30-06-2022</Item>
+      <Item>每星期{reserveNumber}</Item>
+      <Input placeholder='留言' />
+      <SubmitButton
+        color={reserveNumber.includes(caseUnit.case) ? 'green' : '#cc0000'}
+        onClick={loginHandler}
+      >
+        確認預約
       </SubmitButton>
-      <p>or</p>
-      <SubmitButton primary>Continue with Google</SubmitButton>
-      <SubmitButton primary>Continue with Apple</SubmitButton>
-      <SubmitButton primary>Continue with Facebook</SubmitButton>
     </Wrapper>
   )
 }
@@ -57,8 +66,8 @@ const SubmitButton = styled((props) => (
   color: ${(props) => (props.primary ? 'black' : 'white')};
 `
 
-const ButtonWrapper = styled.div`
-  border-top: 1px solid #ddd;
+const Item = styled.div`
+  padding: 20px 0;
 `
 const Title = styled.div`
   width: 100%;
@@ -70,11 +79,11 @@ const Title = styled.div`
 const Wrapper = styled.div`
   background-color: white;
   width: 500px;
-  height: 700px;
+  height: 410px;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-export default Login
+export default ConfirmForm

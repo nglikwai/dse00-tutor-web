@@ -3,41 +3,46 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleLoginButtonOpen } from 'src/redux/page'
+import {
+  setLogout,
+  toggleLoginButtonOpen,
+  toggleLoginPageOpen,
+} from 'src/redux/page'
+import { StatusState } from 'src/redux/page/types'
 import styled from 'styled-components'
 
-type Props = {
-  onClick: () => void
-}
-
-type StatusState = {
-  pageStatus: {
-    open: boolean
-  }
-}
-
-const Dropdown = (props: Props) => {
+const Dropdown = () => {
   const dispatch = useDispatch()
-  const { open } = useSelector((state: StatusState) => state.pageStatus)
+  const { open, login } = useSelector((state: StatusState) => state.pageStatus)
 
   const LoginButtonOnClick = () => {
-    props.onClick()
+    dispatch(toggleLoginPageOpen())
     dispatch(toggleLoginButtonOpen())
   }
 
   return (
     <Wrapper>
-      <ButtonWrapper onClick={() => dispatch(toggleLoginButtonOpen())}>
+      <span>{login && 'Hi, Lik Wai'}</span>
+
+      <ButtonWrapper
+        onClick={() => open === false && dispatch(toggleLoginButtonOpen())}
+      >
         <FontAwesomeIcon icon={faBars} color='white' />
         <FontAwesomeIcon icon={faUser} />
       </ButtonWrapper>
       {open === true && (
         <Menu>
-          <MenuItem onClick={LoginButtonOnClick}>Login</MenuItem>
+          {!login ? (
+            <>
+              <MenuItem onClick={LoginButtonOnClick}>Login</MenuItem>
+              <MenuItem onClick={LoginButtonOnClick}>Register</MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem onClick={() => dispatch(setLogout())}>Log out</MenuItem>
+            </>
+          )}
 
-          <Link href='/'>
-            <MenuItem>Register</MenuItem>
-          </Link>
           <Link href='/'>
             <MenuItem>語言：中文</MenuItem>
           </Link>
@@ -46,7 +51,12 @@ const Dropdown = (props: Props) => {
     </Wrapper>
   )
 }
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  display: flex;
+  width: 160px;
+  justify-content: space-between;
+  align-items: center;
+`
 const ButtonWrapper = styled.div`
   &:hover {
     box-shadow: 0 0px 20px white;
@@ -64,7 +74,7 @@ const Menu = styled.div`
   position: absolute;
   background-color: rgba(256, 256, 256, 0.6);
   height: 160px;
-  padding: 0 4px;
+  padding: 0 12px;
   border-radius: 1rem;
   top: 60px;
   z-index: 10;

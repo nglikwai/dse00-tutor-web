@@ -73,7 +73,7 @@ const UpperWrapper = styled.div`
   position: sticky;
   top: 0;
   border-bottom: 1px solid #ddd;
-  background-color: #fffcf8;
+  background-color: ${({ theme }) => theme.palette.backgroundColor};
   width: 100%;
   display: flex;
   justify-content: center;

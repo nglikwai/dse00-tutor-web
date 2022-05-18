@@ -5,5 +5,11 @@ export type DropdownStatus = {
 export type StatusState = {
   pageStatus: {
     open: boolean
+    loginPage: boolean
+    login: boolean
+    confirmPage: boolean
+  }
+  user: {
+    reserveNumber: number[]
   }
 }

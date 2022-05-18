@@ -20,7 +20,7 @@ const FooterWrapper = styled.div`
   border: 1px solid #ddd;
   display: flex;
   justify-content: center;
-  background: #fffcf8;
+  background: ${({ theme }) => theme.palette.backgroundColor};
 `
 
 const ItemWrapper = styled.div`

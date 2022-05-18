@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import pageStatusReducer from 'src/redux/page'
 import { rootSaga } from 'src/redux/rootSaga'
 import searchReducer from 'src/redux/search'
+import userReducer from 'src/redux/user'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     search: searchReducer,
     pageStatus: pageStatusReducer,
+    user: userReducer,
   },
   middleware: [sagaMiddleware],
 })
