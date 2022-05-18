@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import PageWrapper from 'src/components/global/PageWrapper'
@@ -26,11 +27,34 @@ const Home: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <BasicSearch />
+          <Title>{t('components.search.basicSearch.title')}</Title>
+          <UpperWrapper>
+            <Header>
+              <Link href='/'>
+                <JoinButton>學生</JoinButton>
+              </Link>
+              <BasicSearch />
+              <Link href='/findstudent'>
+                <JoinButton>導師</JoinButton>
+              </Link>
+            </Header>
+          </UpperWrapper>
 
           <Section>
             <SectionTitle>
-              {t('components.tutorRecommendation.title')}
+              {t('components.tutorRecommendation.popular')}
+            </SectionTitle>
+            <TutorList tutors={recommendations} />
+          </Section>
+          <Section>
+            <SectionTitle>
+              {t('components.tutorRecommendation.economy')}
+            </SectionTitle>
+            <TutorList tutors={recommendations} />
+          </Section>
+          <Section>
+            <SectionTitle>
+              {t('components.tutorRecommendation.star')}
             </SectionTitle>
             <TutorList tutors={recommendations} />
           </Section>
@@ -40,17 +64,58 @@ const Home: NextPage = (props: Props) => {
   )
 }
 
-const ContentWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+const Title = styled.h2`
+  font-size: 20px;
+  margin: 20px 0 0 0;
 `
 
+const UpperWrapper = styled.div`
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #ddd;
+  background-color: #fffcf8;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+const Header = styled.div`
+  width: ${({ theme }) => theme.width};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const JoinButton = styled.span`
+  &:hover {
+    box-shadow: 0 0px 20px #ee8888;
+  }
+  transition: 0.4s;
+  background-color: #c00;
+  border: none;
+  border-radius: 24px;
+  color: #fff;
+  font-size: 16px;
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 const Section = styled.div`
-  padding: 48px 0;
+  padding: 44px 0;
+  width: ${({ theme }) => theme.width};
 `
 
 const SectionTitle = styled.h3`
   font-size: 20px;
+  margin: 8px 0 20px 0;
 `
 
 export async function getServerSideProps() {

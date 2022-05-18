@@ -7,16 +7,23 @@
   "buttons": {
     "search": "搜尋"
   },
+  "nav":{
+    "find_student":"揾學生",
+    "find_tutor":"揾補習老師"
+  },
   "components": {
     "search": {
       "basicSearch": {
+        "result":"你的搜尋導師",
         "title": "尋找補習老師",
         "place": "地點",
         "subject": "科目"
       }
     },
     "tutorRecommendation": {
-      "title": "熱門導師"
+      "popular": "熱門導師",
+      "economy":"實惠導師",
+      "star":"升級導師"
     }
   }
 }

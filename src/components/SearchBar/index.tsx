@@ -1,5 +1,11 @@
 // import { useRouter } from 'next/router'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.css'
+
+import {
+  faBars,
+  faMagnifyingGlass,
+  faMars,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { useCallback, useState } from 'react'
@@ -53,7 +59,7 @@ const subjects = [
   '中國歷史',
 ]
 
-const BasicSearch = () => {
+const SearchBar = () => {
   const { t } = useTranslation()
 
   // const router = useRouter()
@@ -89,7 +95,7 @@ const BasicSearch = () => {
 
   return (
     <Wrapper>
-      <Row>
+      <SearchWrapper>
         <Select
           label={t('components.search.basicSearch.place')}
           options={places}
@@ -104,52 +110,67 @@ const BasicSearch = () => {
           onSelect={handleOnSubjectSelect}
         />
 
-        <Link href='/findtutor'>
-          <SearchButtonWrapper>
-            <FontAwesomeIcon icon={faMagnifyingGlass} color='white' size='lg' />
-          </SearchButtonWrapper>
-        </Link>
-      </Row>
+        <label>學費</label>
 
-      {isFetching && <SearchResult>Searching...</SearchResult>}
+        <Range type='range' className='range' min={50} max={300} />
+        <span className='price'>($180)</span>
+        <div>
+          <Button onClick={handleOnSearch}>
+            <FontAwesomeIcon icon={faMars} color='white' size='lg' />
+            <span style={{ padding: '0 0 0 10px' }}>女性</span>
+          </Button>
+        </div>
 
-      {!!tutors.length && (
+        <FilterButton>
+          <FontAwesomeIcon icon={faBars} color='grey' size='lg' />
+        </FilterButton>
+
+        <Button onClick={handleOnSearch}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} color='white' size='lg' />
+        </Button>
+      </SearchWrapper>
+
+      {/* {isFetching && (
         <SearchResult>
-          <h3>Search result:</h3>
-          <TutorList tutors={tutors.slice(0, 4)} />
+          <img src='Spinner.svg' />
         </SearchResult>
-      )}
+      )} */}
+
+      {/* {!!tutors.length && (
+        <SearchResult>
+          <h3>{t('components.search.basicSearch.result')}</h3>
+          <TutorList tutors={tutors.slice(0, 6)} />
+        </SearchResult>
+      )} */}
     </Wrapper>
   )
 }
+const SearchWrapper = styled.div`
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const Wrapper = styled.div``
 
-const Wrapper = styled.div`
-  padding: 20px 0;
+const Title = styled.h2`
+  font-size: 24px;
 `
 
 const Row = styled.div`
   display: flex;
-  border: 1px solid #ccc;
-  background: white;
-  width: 440px;
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0 1px 8px #ddd;
-  padding: 4px 0;
-  margin: 0 0 0 0;
+
   > *:not(:last-child) {
     margin-right: 24px;
   }
 `
-
-const SearchButtonWrapper = styled.span`
+const Button = styled.button`
   background-color: #c00;
   border: none;
   border-radius: 24px;
   color: #fff;
   font-size: 16px;
-  padding: 4px 12px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,4 +181,29 @@ const SearchResult = styled.div`
   margin-top: 24px;
 `
 
-export default BasicSearch
+const FilterButton = styled.button`
+  &:hover {
+    border: 1px #cc0000 solid;
+    color: #cc0000;
+  }
+  padding: 4px 8px;
+  background-color: transparent;
+  color: #ccc;
+  border: 1px #aaa solid;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: 0.7s;
+`
+
+const Range = styled.input`
+  height: 10px;
+  width: 100px;
+  -webkit-appearance: none;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+`
+
+export default SearchBar

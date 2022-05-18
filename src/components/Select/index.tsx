@@ -32,6 +32,7 @@ const Select = (props: Props) => {
 
 const StyledLabel = styled.label`
   margin-right: 10px;
+  font-weight: bold;
 `
 
 const StyledSelect = styled.select`
@@ -44,9 +45,8 @@ const StyledSelect = styled.select`
   background-position-y: 10px;
   width: 100px;
   height: 46px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  font-size: 14px;
+  border: none;
+  font-size: 16px;
   padding: 8px 16px;
   cursor: pointer;
 `
