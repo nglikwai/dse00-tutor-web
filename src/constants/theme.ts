@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { createTheme } from 'styled-breakpoints'
 
 type ThemeStyle = CSSStyleDeclaration['cssText']
 
@@ -11,7 +12,22 @@ export type Theme = {
   fontSizes: string[]
   fontColor: string
   fontFamily: string
+  'styled-breakpoints': {
+    none: string
+    mobile: string
+    tablet: string
+    laptop: string
+    desktop: string
+  }
 }
+
+const mediaQueryBreakpoints = createTheme({
+  none: '0px',
+  mobile: '320px',
+  tablet: '768px',
+  laptop: '1024px',
+  desktop: '1200px',
+})
 
 const theme: Theme = {
   palette: {
@@ -23,6 +39,7 @@ const theme: Theme = {
   fontColor: '#444',
   fontFamily:
     '"PingFang HK", PingFang-HK, PingFangHK, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif',
+  ...mediaQueryBreakpoints,
 }
 
 export const lightTheme = R.mergeDeepRight(theme, {})

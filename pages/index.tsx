@@ -7,6 +7,7 @@ import PageWrapper from 'src/components/global/PageWrapper'
 import BasicSearch from 'src/components/Search/BasicSearch'
 import TutorList from 'src/components/TutorList'
 import { Tutor } from 'src/types'
+import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 type Props = {
@@ -65,8 +66,20 @@ const Home: NextPage = (props: Props) => {
 }
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: 14px;
   margin: 20px 0 0 0;
+
+  ${up('tablet')} {
+    font-size: 16px;
+  }
+
+  ${up('laptop')} {
+    font-size: 18px;
+  }
+
+  ${up('desktop')} {
+    font-size: 20px;
+  }
 `
 
 const UpperWrapper = styled.div`
