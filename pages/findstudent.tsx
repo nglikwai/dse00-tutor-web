@@ -42,7 +42,10 @@ const Cases: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <BasicSearch />
+          <SearchWrpper>
+            <BasicSearch />
+          </SearchWrpper>
+
           <div>
             <span>{t('components.search.basicSearch.place')}: </span>
             <span>{query.place ?? ''}</span>
@@ -58,6 +61,12 @@ const Cases: NextPage = (props: Props) => {
           {cases.map((caseUnit) => (
             <CaseCard key={caseUnit.name} caseUnit={caseUnit} />
           ))}
+          {cases.map((caseUnit) => (
+            <CaseCard key={caseUnit.name} caseUnit={caseUnit} />
+          ))}
+          {cases.map((caseUnit) => (
+            <CaseCard key={caseUnit.name} caseUnit={caseUnit} />
+          ))}
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -67,6 +76,12 @@ const Cases: NextPage = (props: Props) => {
 const ContentWrapper = styled.div`
   max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
+`
+
+const SearchWrpper = styled.div`
+  padding: 80px 0;
+  position: sticky;
+  top: -40px;
 `
 
 export async function getServerSideProps() {

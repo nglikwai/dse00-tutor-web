@@ -1,6 +1,7 @@
+import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import {
   faBook,
-  faHeart,
+  faHeart as faHearted,
   faLocation,
   faMarsDouble,
   faPlus,
@@ -9,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 
@@ -18,6 +19,8 @@ type Props = {
 }
 
 const ResultCard = (props: Props) => {
+  const [favour, setFavour] = useState(false)
+
   const { caseUnit } = props
   return (
     <Link href={`/case/${caseUnit._id}`}>
@@ -26,29 +29,31 @@ const ResultCard = (props: Props) => {
           <Avator />
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faBook} color='#cc0000' /> {caseUnit.subject}
+          <FontAwesomeIcon icon={faBook} color='#d4d4d4' /> {caseUnit.subject}
         </Item>
-        <Item>F.5 </Item>
+        <Item>中五 </Item>
         <Item>
-          <FontAwesomeIcon icon={faMarsDouble} color='#cc0000' />{' '}
+          <FontAwesomeIcon icon={faMarsDouble} color='#d4d4d4' />{' '}
           {caseUnit.gender}
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faLocation} color='#cc0000' />{' '}
+          <FontAwesomeIcon icon={faLocation} color='#d4d4d4' />{' '}
           {caseUnit.region}
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faSchool} color='#cc0000' /> 田家炳{' '}
+          <FontAwesomeIcon icon={faSchool} color='#d4d4d4' /> 田家炳{' '}
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faSackDollar} color='#cc0000' />{' '}
+          <FontAwesomeIcon icon={faSackDollar} color='#d4d4d4' />{' '}
           <b> ${caseUnit.price}</b>
         </Item>
+
         <Item>
-          <FontAwesomeIcon icon={faPlus} color='#cc0000' />
-        </Item>
-        <Item>
-          <FontAwesomeIcon icon={faHeart} color='#cc0000' />
+          <FontAwesomeIcon
+            onClick={() => setFavour(true)}
+            icon={favour ? faHearted : faHeart}
+            color='#ffaeae'
+          />
         </Item>
       </CaseWrapper>
     </Link>
@@ -68,20 +73,29 @@ const Avator = styled.div`
 `
 
 const Item = styled.div`
+  font-size: 20px;
   width: 160px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+  align-items: center;
 `
 const CaseWrapper = styled.div`
-  background-color: #fff9e9;
-  box-shadow: 1px 1px 1px rgb(255 239 199);
+  &:hover {
+    box-shadow: 0 10px 10px #eee;
+  }
+  background-color: #fffbf1;
+  box-shadow: 1px 2px 4px #ffecb2;
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 3rem;
   padding: 10px 0;
-  margin: 20px 0;
+  margin: 28px 0;
   width: 100%;
   cursor: pointer;
   font-size: 16px;
   color: #333;
+  transition: 0.4s;
 `
 
 export default ResultCard

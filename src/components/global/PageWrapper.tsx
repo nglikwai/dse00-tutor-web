@@ -2,13 +2,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 import { env } from 'process'
 import * as R from 'ramda'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from 'src/components/global/Footer'
 import Header from 'src/components/global/Header'
 import { toggleLoginButtonOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
+import { loadUserRequest } from 'src/redux/user'
 import styled from 'styled-components'
+
 type Props = {
   children: React.ReactNode
 }
@@ -24,6 +26,11 @@ const PageWrapper = (props: Props) => {
       dispatch(toggleLoginButtonOpen())
     }
   }
+
+  useEffect(() => {
+    dispatch(loadUserRequest())
+  }, [])
+
   // edited
   return (
     <Wrapper {...restProps}>

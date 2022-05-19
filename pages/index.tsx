@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import PageWrapper from 'src/components/global/PageWrapper'
 import BasicSearch from 'src/components/Search/BasicSearch'
 import TutorList from 'src/components/TutorList'
+import { StatusState } from 'src/redux/page/types'
 import { Tutor } from 'src/types'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
@@ -16,7 +18,7 @@ type Props = {
 
 const Home: NextPage = (props: Props) => {
   const { recommendations } = props
-
+  const { isTutor, name } = useSelector((state: StatusState) => state.user)
   const { t } = useTranslation()
 
   return (
@@ -28,7 +30,7 @@ const Home: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <Title>{t('components.search.basicSearch.title')}</Title>
+          <Title>尋找{isTutor ? '你的學生' : '補習老師'}</Title>
           <UpperWrapper>
             <Header>
               <Link href='/'>
@@ -46,17 +48,22 @@ const Home: NextPage = (props: Props) => {
               {t('components.tutorRecommendation.popular')}
             </SectionTitle>
             <TutorList tutors={recommendations} />
+            <TutorList tutors={recommendations} />
           </Section>
           <Section>
             <SectionTitle>
               {t('components.tutorRecommendation.economy')}
             </SectionTitle>
             <TutorList tutors={recommendations} />
+            <TutorList tutors={recommendations} />
           </Section>
           <Section>
             <SectionTitle>
               {t('components.tutorRecommendation.star')}
             </SectionTitle>
+            <TutorList tutors={recommendations} />
+            <TutorList tutors={recommendations} />
+            <TutorList tutors={recommendations} />
             <TutorList tutors={recommendations} />
           </Section>
         </ContentWrapper>
@@ -83,6 +90,9 @@ const Title = styled.h2`
 `
 
 const UpperWrapper = styled.div`
+  &:hover {
+    opacity: 1;
+  }
   position: sticky;
   top: 0;
   border-bottom: 1px solid #ddd;
@@ -90,6 +100,8 @@ const UpperWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  opacity: 0.8;
+  transition: 0.4s;
 `
 const Header = styled.div`
   width: ${({ theme }) => theme.width};
@@ -122,13 +134,13 @@ const ContentWrapper = styled.div`
   align-items: center;
 `
 const Section = styled.div`
-  padding: 44px 0;
+  padding: 20px 0;
   width: ${({ theme }) => theme.width};
 `
 
 const SectionTitle = styled.h3`
   font-size: 20px;
-  margin: 8px 0 20px 0;
+  font-weight: bold;
 `
 
 export async function getServerSideProps() {

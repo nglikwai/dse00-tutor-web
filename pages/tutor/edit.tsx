@@ -1,8 +1,10 @@
 import {
   faBook,
   faBookBookmark,
-  faCheck,
+  faCertificate,
   faHouse,
+  faPhone,
+  faPlus,
   faShieldAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,23 +12,21 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import * as R from 'ramda'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import Comment from 'src/components/Comment'
-import CommentBox from 'src/components/CommentBox'
 import PageWrapper from 'src/components/global/PageWrapper'
-import { StatusState } from 'src/redux/page/types'
 import styled from 'styled-components'
 
 const Cases: NextPage = () => {
   const { t } = useTranslation()
-  const [commented, setCommented] = useState(false)
-  const { login } = useSelector((state: StatusState) => state.user)
 
-  const onCommented = () => {
-    setCommented(true)
-  }
+  const [name, setName] = useState('陳加文')
+  const [location, setLocation] = useState('大埔')
+  const [subject, setSubject] = useState('生物、化學')
+  const [school, setSchool] = useState('香港中文大學')
+
+  // const router = useRouter()
+
   return (
     <div>
       <Head>
@@ -41,49 +41,76 @@ const Cases: NextPage = () => {
               <Avator />
               <ItemTitle>
                 <FontAwesomeIcon icon={faShieldAlt} color='#444' size='lg' />
-                <ItemInner>已驗證</ItemInner>
+                <ItemInner>認證資料</ItemInner>
               </ItemTitle>
               <Item>
-                <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
-                <ItemInner>電話號碼</ItemInner>
+                <FontAwesomeIcon icon={faPhone} color='#444' size='lg' />
+                <ItemInner>
+                  <Input height='36px' placeholder='61234567' />
+                </ItemInner>
               </Item>
               <Item>
-                <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
-                <ItemInner>考試證書</ItemInner>
+                <FontAwesomeIcon icon={faCertificate} color='#444' size='lg' />
+                <ItemInner>
+                  <Input height='36px' placeholder='61234567' />
+                </ItemInner>
               </Item>
             </LeftBarWrapper>
             <RightBarWrapper>
               <Header>
                 <ItemTitle>
-                  你好，我是陳加文老師 <ItemText>自 05-05-2022 加入</ItemText>
+                  你好，我是
+                  <Input
+                    value={name}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      setName(e.target.value)
+                    }
+                  />
+                  老師 <ItemText>自 05-05-2022 加入</ItemText>
                 </ItemTitle>
-                {login && (
-                  <Link href='/tutor/edit'>
-                    <MoreButton>編輯</MoreButton>
-                  </Link>
-                )}
+                <Link href='/tutor/1'>
+                  <MoreButton>確認</MoreButton>
+                </Link>
               </Header>
 
               <Brief>
                 <div>
-                  <ItemTitle>關於陳老師</ItemTitle>
-                  <p>
-                    I Søren Sarup (born 1975) lives in Aarhus, Fanø and Agger. I
+                  <ItemTitle>關於{name.substring(0, 1)}老師</ItemTitle>
+                  <Textarea
+                    defaultValue='I Søren Sarup (born 1975) lives in Aarhus, Fanø and Agger. I
                     am an independent Danish architect that works professionally
                     with planning and design of all building types, with a
                     passionated focus on vacation-homes, nature hotels and
-                    Boutique hotels.
-                  </p>
+                    Boutique hotels.'
+                  />
                 </div>
               </Brief>
               <ItemsWrapper>
                 <Item>
                   <FontAwesomeIcon icon={faHouse} color='#555' size='lg' />
-                  <ItemInner>住在大埔</ItemInner>
+                  <ItemInner>
+                    住在
+                    <Input
+                      height='36px'
+                      value={location}
+                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        setLocation(e.target.value)
+                      }
+                    />
+                  </ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon icon={faBook} color='#555' size='lg' />
-                  <ItemInner>教授化學、生物</ItemInner>
+                  <ItemInner>
+                    教授
+                    <Input
+                      height='36px'
+                      value={subject}
+                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        setSubject(e.target.value)
+                      }
+                    />
+                  </ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon
@@ -91,28 +118,28 @@ const Cases: NextPage = () => {
                     color='#555'
                     size='lg'
                   />
-                  <ItemInner>就讀香港中文大學</ItemInner>
+                  <ItemInner>
+                    就讀
+                    <Input
+                      height='36px'
+                      value={school}
+                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        setSchool(e.target.value)
+                      }
+                    />
+                  </ItemInner>
                 </Item>
               </ItemsWrapper>
               <ItemsWrapper>
                 <ItemTitle>課堂筆記</ItemTitle>
-                <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
-                <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
-              </ItemsWrapper>
-              <ItemsWrapper>
-                <ItemTitle>學生留言</ItemTitle>
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                {login && !commented && (
-                  <CommentBox onCommented={onCommented} />
-                )}
-
-                <MoreButton>更多留言</MoreButton>
+                <Notes>
+                  {' '}
+                  <FontAwesomeIcon icon={faPlus} color='#555' size='2x' />
+                </Notes>
+                <Notes>
+                  {' '}
+                  <FontAwesomeIcon icon={faPlus} color='#555' size='2x' />
+                </Notes>
               </ItemsWrapper>
             </RightBarWrapper>
           </Wrapper>
@@ -121,11 +148,30 @@ const Cases: NextPage = () => {
     </div>
   )
 }
+
+const Input = styled((props) => (
+  <input {...R.omit(['withTopPadding'], props)} />
+))`
+  padding: 12px 20px;
+  width: 160px;
+  height: ${(props) => (props.height ? props.height : 'auto')};
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  margin: 0 20px;
+`
+const Textarea = styled.textarea`
+  padding: 12px 20px;
+  width: 500px;
+  height: 120px;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+`
+
 const Header = styled.div`
-  padding: 30px 0;
+  padding: 0 0 30px 0;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
 `
 const ContentWrapper = styled.div`
   max-width: ${({ theme }) => theme.width};
@@ -176,19 +222,26 @@ const Brief = styled.div`
 `
 
 const ItemsWrapper = styled.div`
-  padding: 36px 0;
+  padding: 50px 0;
   border-bottom: 1px solid #ccc;
 `
-const Notes = styled.img`
+const Notes = styled.button`
+  &:hover {
+    background-color: #eee;
+  }
   width: 300px;
   height: 200px;
   border-radius: 1rem;
+  border: 1px #ccc solid;
   margin: 0 20px 0 0;
+  background-color: transparent;
+  transition: 0.4s;
 `
 
 const Item = styled.div`
   display: flex;
   padding: 10px 0;
+  align-items: center;
 `
 const ItemTitle = styled.h4`
   padding: 20px 0;
@@ -204,12 +257,16 @@ const ItemText = styled.span`
 `
 
 const MoreButton = styled.button`
-  background-color: transparent;
+  &:hover {
+    background-color: #dd0000;
+  }
+  background-color: #cc0000;
   border-radius: 10px;
-  padding: 10px 50px;
-  margin: 0 0 50px 0;
-  color: #444;
-  border: 1px solid #444;
+  padding: 8px 60px;
+  margin: 50px 0;
+  color: #fff;
+  border: none;
+  transition: 0.4s;
 `
 
 export default Cases

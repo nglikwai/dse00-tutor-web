@@ -1,3 +1,4 @@
+import user from 'models/user'
 import Link from 'next/link'
 import { LogoJsonLd } from 'next-seo'
 import React, { useState } from 'react'
@@ -14,6 +15,7 @@ import styled from 'styled-components'
 const Header = () => {
   const dispatch = useDispatch()
   const { loginPage } = useSelector((state: StatusState) => state.pageStatus)
+  const { isTutor } = useSelector((state: StatusState) => state.user)
 
   const { t } = useTranslation()
 
@@ -24,12 +26,21 @@ const Header = () => {
           <StyledLink href={PATHNAME.HOME_PAGE}>
             <LogoWrapper>{t('common.product_name')}</LogoWrapper>
           </StyledLink>
-          <StyledLink href={PATHNAME.FIND_STUDENT}>
-            <LinkWrapper>{t('nav.find_student')}</LinkWrapper>
-          </StyledLink>
-          <StyledLink href={PATHNAME.FIND_TUTOR}>
-            <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
-          </StyledLink>
+          {isTutor && (
+            <StyledLink href={PATHNAME.FIND_STUDENT}>
+              <LinkWrapper>{t('nav.find_student')}</LinkWrapper>
+            </StyledLink>
+          )}
+          {!isTutor && (
+            <>
+              <StyledLink href={PATHNAME.FIND_STUDENT}>
+                <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
+              </StyledLink>
+              <StyledLink href='/case/new'>
+                <LinkWrapper>建立補習個案</LinkWrapper>
+              </StyledLink>
+            </>
+          )}
         </LeftWrapper>
         <RightWrapper>
           <Dropdown />

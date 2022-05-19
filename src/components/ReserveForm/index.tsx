@@ -13,10 +13,10 @@ type Props = {
 const ReserveForm = (props: Props) => {
   const dispatch = useDispatch()
   const { caseUnit } = props
-  const { confirmPage, login } = useSelector(
-    (state: StatusState) => state.pageStatus,
+  const { confirmPage } = useSelector((state: StatusState) => state.pageStatus)
+  const { reserveNumber, login } = useSelector(
+    (state: StatusState) => state.user,
   )
-  const { reserveNumber } = useSelector((state: StatusState) => state.user)
 
   let reserved = false
 
@@ -25,28 +25,29 @@ const ReserveForm = (props: Props) => {
   }
   return (
     <Wrapper>
-      <h4>$180 / 小時</h4>
-      <Input type='number' placeholder='聯絡電話' />
+      <h4>${caseUnit.price} / 小時</h4>
+      <Input placeholder='聯絡電話' />
       <ReserveButton
         color={reserved ? 'green' : '#cc0000'}
         onClick={() =>
           dispatch(login ? toggleConfirmPageOpen() : toggleLoginPageOpen())
         }
+        disabled={!!reserved}
       >
-        {reserved ? '已預約' : '預約學生'}
+        {reserved ? '已預約' : caseUnit.isTutor ? '預約學生' : '確認建立'}
       </ReserveButton>
       <ItemsWrapper>
         <Item>
           <span>每堂時數</span>
-          <span>2 小時</span>
+          <span>{caseUnit.hour}</span>
         </Item>
         <Item>
           <span>每月堂數</span>
-          <span>8 堂</span>
+          <span>{caseUnit.lession * 4} 堂</span>
         </Item>
         <Item>
           <span>預計每月收入</span>
-          <span>$ {180 * 8}</span>
+          <span>$ {caseUnit.price * caseUnit.lession * caseUnit.hour * 4}</span>
         </Item>
       </ItemsWrapper>
       <Item>

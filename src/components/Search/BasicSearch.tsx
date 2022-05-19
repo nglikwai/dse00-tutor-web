@@ -113,12 +113,12 @@ const BasicSearch = () => {
 
       {isFetching && <SearchResult>Searching...</SearchResult>}
 
-      {!!tutors.length && (
+      {/* {!!tutors.length && (
         <SearchResult>
           <h3>Search result:</h3>
           <TutorList tutors={tutors.slice(0, 4)} />
         </SearchResult>
-      )}
+      )} */}
     </Wrapper>
   )
 }
