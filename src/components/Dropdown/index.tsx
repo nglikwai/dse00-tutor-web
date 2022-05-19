@@ -1,19 +1,22 @@
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import { signOut } from 'next-auth/client'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setLogout,
-  toggleLoginButtonOpen,
-  toggleLoginPageOpen,
-} from 'src/redux/page'
+import { toggleLoginButtonOpen, toggleLoginPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
+import { changeIsTutor } from 'src/redux/user'
 import styled from 'styled-components'
 
 const Dropdown = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { open, login } = useSelector((state: StatusState) => state.pageStatus)
+  const { open } = useSelector((state: StatusState) => state.pageStatus)
+  const { isTutor, isLogin, name } = useSelector(
+    (state: StatusState) => state.user,
+  )
 
   const LoginButtonOnClick = () => {
     dispatch(toggleLoginPageOpen())
@@ -22,7 +25,9 @@ const Dropdown = () => {
 
   return (
     <Wrapper>
-      <span>{login && 'Hi, Lik Wai'}</span>
+      <Link href='/tutor/1'>
+        <Name>{isLogin ? `${t('profile.hi')}, ${name}` : ''}</Name>
+      </Link>
 
       <ButtonWrapper
         onClick={() => open === false && dispatch(toggleLoginButtonOpen())}
@@ -32,19 +37,28 @@ const Dropdown = () => {
       </ButtonWrapper>
       {open === true && (
         <Menu>
-          {!login ? (
+          {!isLogin ? (
             <>
-              <MenuItem onClick={LoginButtonOnClick}>Login</MenuItem>
-              <MenuItem onClick={LoginButtonOnClick}>Register</MenuItem>
+              <MenuItem onClick={LoginButtonOnClick}>
+                {t('buttons.login')}
+              </MenuItem>
+              <MenuItem onClick={LoginButtonOnClick}>
+                {t('buttons.signup')}
+              </MenuItem>
             </>
           ) : (
             <>
-              <MenuItem onClick={() => dispatch(setLogout())}>Log out</MenuItem>
+              <MenuItem onClick={() => signOut()}>
+                {t('buttons.logout')}
+              </MenuItem>
             </>
           )}
 
           <Link href='/'>
-            <MenuItem>語言：中文</MenuItem>
+            <MenuItem onClick={() => dispatch(changeIsTutor())}>
+              {t('buttons.switch_to')}{' '}
+              {!isTutor ? `${t('common.tutor')}` : `${t('common.student')}`}
+            </MenuItem>
           </Link>
         </Menu>
       )}
@@ -53,7 +67,7 @@ const Dropdown = () => {
 }
 const Wrapper = styled.div`
   display: flex;
-  width: 160px;
+  width: 200px;
   justify-content: space-between;
   align-items: center;
 `
@@ -92,6 +106,18 @@ const MenuItem = styled.div`
   border-radius: 1.5rem;
   transition: 0.4s;
   cursor: pointer;
+`
+
+const Name = styled.span`
+  &:hover {
+    text-shadow: 0 0 20px white;
+  }
+  &:active {
+    background-color: #dd1111;
+  }
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 2rem;
 `
 
 export default Dropdown

@@ -1,20 +1,14 @@
-import Router from 'next/router'
-import * as R from 'ramda'
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { setLogin, toggleLoginPageOpen } from 'src/redux/page'
 import styled from 'styled-components'
 
 const Login = () => {
-  const dispatch = useDispatch()
-
   return (
     <CommentWrapper>
       <img
         src='https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
         width='90px'
         height='90px'
-      />{' '}
+      />
       <RightWrapper>
         <Name>陳小明</Name>
         <Comment>

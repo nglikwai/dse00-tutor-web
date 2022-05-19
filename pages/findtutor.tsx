@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PageWrapper from 'src/components/global/PageWrapper'
 import ResultCard from 'src/components/ResultCard'
 import SearchBar from 'src/components/SearchBar'
+import TutorList from 'src/components/TutorList'
 import { searchTutorRequest } from 'src/redux/search'
 import {
   isFetchingSelector,
@@ -111,23 +112,27 @@ const Search: NextPage = (props: Props) => {
             <SearchBar />
           </Float>
 
-          <div>
-            <span>{t('components.search.basicSearch.place')}: </span>
-            <span>{query.place ?? ''}</span>
-            <span>{t('components.search.basicSearch.subject')}: </span>
-            <span>{query.subject ?? ''}</span>
-          </div>
-
+          <Section>
+            <SectionTitle>
+              {t('components.search.basicSearch.place')} : {query.place ?? ''}{' '}
+              {t('components.search.basicSearch.subject')}:{query.subject ?? ''}
+            </SectionTitle>
+            <TutorList tutors={tutors} />
+            <TutorList tutors={tutors} />
+            <TutorList tutors={tutors} />
+            <TutorList tutors={tutors} />
+            <TutorList tutors={tutors} />
+            <TutorList tutors={tutors} />
+          </Section>
           {isFetching && (
-            <div>
+            <Spinner>
               <img src='Spinner.svg' />
-            </div>
+            </Spinner>
           )}
-
-          {tutors &&
+          {/* {tutors &&
             tutors.map((tutor) => (
               <ResultCard key={tutor.name} tutor={tutor} />
-            ))}
+            ))} */}
         </ContentWrapper>
       </PageWrapper>
     </div>
@@ -144,6 +149,21 @@ const Float = styled.div`
 const ContentWrapper = styled.div`
   max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
+`
+
+const Section = styled.div`
+  padding: 20px 0;
+  width: ${({ theme }) => theme.width};
+`
+
+const SectionTitle = styled.h3`
+  font-size: 20px;
+  font-weight: bold;
+`
+
+const Spinner = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 export default Search

@@ -1,13 +1,15 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
 const Footer = () => {
+  const { t } = useTranslation()
   return (
     <FooterWrapper>
       <ItemWrapper>
         <Item>© 2022 DSE00 Tutor</Item>
-        <Item>Privacy</Item>
-        <Item>Terms</Item>
+        <Item>{t('footer.privacy')}</Item>
+        <Item>{t('footer.term')}</Item>
       </ItemWrapper>
     </FooterWrapper>
   )

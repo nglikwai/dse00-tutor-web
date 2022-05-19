@@ -1,19 +1,18 @@
 import Link from 'next/link'
-import { LogoJsonLd } from 'next-seo'
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Dropdown from 'src/components/Dropdown'
 import Login from 'src/components/Login'
 import PATHNAME from 'src/constants/pathname'
 import { toggleLoginPageOpen } from 'src/redux/page'
-import { toggleOpenPageSelector } from 'src/redux/page/selectors'
 import { StatusState } from 'src/redux/page/types'
 import styled from 'styled-components'
 
 const Header = () => {
   const dispatch = useDispatch()
   const { loginPage } = useSelector((state: StatusState) => state.pageStatus)
+  const { isTutor } = useSelector((state: StatusState) => state.user)
 
   const { t } = useTranslation()
 
@@ -24,12 +23,21 @@ const Header = () => {
           <StyledLink href={PATHNAME.HOME_PAGE}>
             <LogoWrapper>{t('common.product_name')}</LogoWrapper>
           </StyledLink>
-          <StyledLink href={PATHNAME.FIND_STUDENT}>
-            <LinkWrapper>{t('nav.find_student')}</LinkWrapper>
-          </StyledLink>
-          <StyledLink href={PATHNAME.FIND_TUTOR}>
-            <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
-          </StyledLink>
+          {isTutor && (
+            <StyledLink href={PATHNAME.FIND_STUDENT}>
+              <LinkWrapper>{t('nav.find_student')}</LinkWrapper>
+            </StyledLink>
+          )}
+          {!isTutor && (
+            <>
+              <StyledLink href={PATHNAME.FIND_STUDENT}>
+                <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
+              </StyledLink>
+              <StyledLink href='/case/new'>
+                <LinkWrapper>{t('nav.create_case')}</LinkWrapper>
+              </StyledLink>
+            </>
+          )}
         </LeftWrapper>
         <RightWrapper>
           <Dropdown />
