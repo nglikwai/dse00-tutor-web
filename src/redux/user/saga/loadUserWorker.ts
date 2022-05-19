@@ -1,15 +1,11 @@
-import { PayloadAction } from '@reduxjs/toolkit'
-import absoluteUrl from 'next-absolute-url'
 import { call, put } from 'redux-saga/effects'
-import { loadUserRequest, loadUserSuccess } from 'src/redux/user'
+import { loadUserSuccess } from 'src/redux/user'
 import { User } from 'src/types'
-
-import { LoadUserSuccessPayload } from '../types'
 
 export function* loadUserWorker() {
   try {
     const response = (yield call(() =>
-      fetch('http://localhost:3000/api/auth/auth'),
+      fetch('https://tutor.dse00.com/api/auth/auth'),
     )) as Response
 
     const user = (yield response.json()) as User

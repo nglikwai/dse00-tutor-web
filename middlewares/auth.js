@@ -11,7 +11,6 @@ const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Login first'), 401)
   }
   req.user = session.user
-  console.log(req.user)
 
   next()
 })
