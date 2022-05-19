@@ -1,8 +1,8 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
-import Router from 'next/router'
+import { GetServerSideProps } from 'next'
 import { getSession, signIn } from 'next-auth/client'
 import * as R from 'ramda'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { toggleLoginPageOpen } from 'src/redux/page'
 import { loadUserRequest } from 'src/redux/user'
@@ -10,10 +10,9 @@ import styled from 'styled-components'
 
 const Login = () => {
   const dispatch = useDispatch()
-
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
 
   const loginHandler = async (e: React.MouseEvent) => {
     dispatch(loadUserRequest())
@@ -28,8 +27,8 @@ const Login = () => {
   }
   return (
     <Wrapper>
-      <Title>Log in or sign up</Title>
-      <Welcome>Welcome to DSE00 Tutor</Welcome>
+      <Title> {t('components.loginPage.loginOrSignin')}</Title>
+      <Welcome>{t('common.welcome')}</Welcome>
       <Input
         placeholder='username'
         type='email'
@@ -43,12 +42,14 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <SubmitButton color={'#cc0000'} onClick={loginHandler}>
-        Continue
+        {t('buttons.continue')}
       </SubmitButton>
-      <p>or</p>
-      <SubmitButton primary='true'>Continue with Google</SubmitButton>
-      <SubmitButton primary='true'>Continue with Apple</SubmitButton>
-      <SubmitButton primary='true'>Continue with Facebook</SubmitButton>
+      <p>{t('common.or')}</p>
+      <SubmitButton primary='true'>{t('buttons.loginWithGoogle')}</SubmitButton>
+      <SubmitButton primary='true'>{t('buttons.loginWithApple')}</SubmitButton>
+      <SubmitButton primary='true'>
+        {t('buttons.loginWithFacebook')}
+      </SubmitButton>
     </Wrapper>
   )
 }
@@ -81,9 +82,6 @@ const SubmitButton = styled((props) => (
   color: ${(props) => (props.primary ? 'black' : 'white')};
 `
 
-const ButtonWrapper = styled.div`
-  border-top: 1px solid #ddd;
-`
 const Title = styled.div`
   width: 100%;
   text-align: center;

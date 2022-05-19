@@ -41,7 +41,7 @@ const Cases: NextPage = () => {
               <Avator />
               <ItemTitle>
                 <FontAwesomeIcon icon={faShieldAlt} color='#444' size='lg' />
-                <ItemInner>認證資料</ItemInner>
+                <ItemInner>{t('profile.verification')}</ItemInner>
               </ItemTitle>
               <Item>
                 <FontAwesomeIcon icon={faPhone} color='#444' size='lg' />
@@ -59,23 +59,30 @@ const Cases: NextPage = () => {
             <RightBarWrapper>
               <Header>
                 <ItemTitle>
-                  你好，我是
+                  {t('profile.hi')}，{t('profile.i_am')}
                   <Input
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setName(e.target.value)
                     }
                   />
-                  老師 <ItemText>自 05-05-2022 加入</ItemText>
+                  {t('profile.teacher')}{' '}
+                  <ItemText>
+                    {t('profile.from')} 05-05-2022 {t('profile.join')}
+                  </ItemText>
                 </ItemTitle>
                 <Link href='/tutor/1'>
-                  <MoreButton>確認</MoreButton>
+                  <MoreButton>{t('buttons.comfirm')}</MoreButton>
                 </Link>
               </Header>
 
               <Brief>
                 <div>
-                  <ItemTitle>關於{name.substring(0, 1)}老師</ItemTitle>
+                  <ItemTitle>
+                    {t('profile.about')}
+                    {name.substring(0, 1)}
+                    {t('profile.teacher')}
+                  </ItemTitle>
                   <Textarea
                     defaultValue='I Søren Sarup (born 1975) lives in Aarhus, Fanø and Agger. I
                     am an independent Danish architect that works professionally
@@ -89,7 +96,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faHouse} color='#555' size='lg' />
                   <ItemInner>
-                    住在
+                    {t('profile.live_in')}
                     <Input
                       height='36px'
                       value={location}
@@ -102,7 +109,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faBook} color='#555' size='lg' />
                   <ItemInner>
-                    教授
+                    {t('profile.teach')}
                     <Input
                       height='36px'
                       value={subject}
@@ -119,7 +126,7 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    就讀
+                    {t('profile.study_at')}
                     <Input
                       height='36px'
                       value={school}
@@ -131,13 +138,11 @@ const Cases: NextPage = () => {
                 </Item>
               </ItemsWrapper>
               <ItemsWrapper>
-                <ItemTitle>課堂筆記</ItemTitle>
+                <ItemTitle>{t('profile.note')}</ItemTitle>
                 <Notes>
-                  {' '}
                   <FontAwesomeIcon icon={faPlus} color='#555' size='2x' />
                 </Notes>
                 <Notes>
-                  {' '}
                   <FontAwesomeIcon icon={faPlus} color='#555' size='2x' />
                 </Notes>
               </ItemsWrapper>

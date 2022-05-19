@@ -14,13 +14,13 @@ const ReserveForm = (props: Props) => {
   const dispatch = useDispatch()
   const { caseUnit } = props
   const { confirmPage } = useSelector((state: StatusState) => state.pageStatus)
-  const { reserveNumber, login } = useSelector(
+  const { reserveNumber, isLogin } = useSelector(
     (state: StatusState) => state.user,
   )
 
   let reserved = false
 
-  if (reserveNumber.includes(caseUnit.case) && login) {
+  if (reserveNumber.includes(caseUnit.case) && isLogin) {
     reserved = true
   }
   return (
@@ -30,7 +30,7 @@ const ReserveForm = (props: Props) => {
       <ReserveButton
         color={reserved ? 'green' : '#cc0000'}
         onClick={() =>
-          dispatch(login ? toggleConfirmPageOpen() : toggleLoginPageOpen())
+          dispatch(isLogin ? toggleConfirmPageOpen() : toggleLoginPageOpen())
         }
         disabled={!!reserved}
       >

@@ -1,10 +1,9 @@
-import Router from 'next/router'
 import * as R from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleConfirmPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
-import user, { confirmReserve } from 'src/redux/user'
+import { confirmReserve } from 'src/redux/user'
 import { CaseUnit } from 'src/types'
 import styled from 'styled-components'
 type Props = {
@@ -14,7 +13,6 @@ type Props = {
 const ConfirmForm = (props: Props) => {
   const { caseUnit } = props
   const dispatch = useDispatch()
-  const { confirmPage } = useSelector((state: StatusState) => state.pageStatus)
   const { reserveNumber } = useSelector((state: StatusState) => state.user)
 
   const loginHandler = () => {

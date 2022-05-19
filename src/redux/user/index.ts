@@ -12,7 +12,7 @@ const initialState: User = {
   email: '',
   createdAt: '',
   avatar: { public_id: '', url: '' },
-  login: false,
+  isLogin: false,
 }
 
 export const userSlice = createSlice({
@@ -29,7 +29,7 @@ export const userSlice = createSlice({
       state.fetching = true
     },
     loadUserSuccess: (state, action) => {
-      state.login = true
+      state.isLogin = true
       state.fetching = false
       state._id = action.payload.user.user._id
       state.email = action.payload.user.user.email
@@ -39,7 +39,7 @@ export const userSlice = createSlice({
       state.avatar = action.payload.user.user.avatar
     },
     logout: (state) => {
-      state.login = false
+      state.isLogin = false
     },
   },
 })

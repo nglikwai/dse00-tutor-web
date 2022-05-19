@@ -15,7 +15,7 @@ type Props = {
 }
 
 const TutorCard = (props: Props) => {
-  const { login } = useSelector((state: StatusState) => state.user)
+  const { isLogin } = useSelector((state: StatusState) => state.user)
   const [favor, setFavor] = useState(false)
   const dispatch = useDispatch()
   const { tutor } = props
@@ -23,7 +23,9 @@ const TutorCard = (props: Props) => {
     <Wrapper>
       <PopularTag
         onClick={
-          login ? () => setFavor(!favor) : () => dispatch(toggleLoginPageOpen())
+          isLogin
+            ? () => setFavor(!favor)
+            : () => dispatch(toggleLoginPageOpen())
         }
       >
         <FontAwesomeIcon

@@ -10,17 +10,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import * as R from 'ramda'
 import React, { useState } from 'react'
-import {
-  DayPicker,
-  DayPickerRangeController,
-  SingleDatePicker,
-} from 'react-dates'
+import { DayPicker } from 'react-dates'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
 import PageWrapper from 'src/components/global/PageWrapper'
 import Map from 'src/components/Map/index'
 import ReserveForm from 'src/components/ReserveForm'
@@ -30,6 +23,7 @@ import styled from 'styled-components'
 const Cases: NextPage = () => {
   const { t } = useTranslation()
 
+  const date = 'Fri May 20 2022 '
   const [name, setName] = useState('')
   const [location, setLocation] = useState('')
   const [subject, setSubject] = useState('')
@@ -66,7 +60,7 @@ const Cases: NextPage = () => {
       <PageWrapper>
         <ContentWrapper>
           <Header>
-            <ItemTitle>建立補習個案</ItemTitle>
+            <ItemTitle>{t('nav.create_case')}</ItemTitle>
             <p>{location}</p>
           </Header>
           <LowerWrapper>
@@ -74,8 +68,10 @@ const Cases: NextPage = () => {
               <Brief>
                 <div>
                   <ItemTitle>
-                    {name}
-                    同學的補習個案
+                    <span>
+                      {name}
+                      {t('newCase.your_case')}
+                    </span>
                   </ItemTitle>
                   <p>
                     中{form}，{subject}，{gender}
@@ -91,8 +87,8 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    刊登時間
-                    <ItemText>{Date()}</ItemText>
+                    <span>{t('newCase.post_date')}</span>
+                    <ItemText>{date}</ItemText>
                   </ItemInner>
                 </Item>
                 <Item>
@@ -102,7 +98,7 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    姓名{' '}
+                    <span>{t('newCase.name')}</span>
                     <Input
                       value={name}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -119,7 +115,7 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    學校
+                    <span>{t('newCase.school')}</span>
                     <Input
                       value={school}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -136,7 +132,7 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    年級{' '}
+                    <span>{t('newCase.form')}</span>
                     <Input
                       value={form}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -153,7 +149,7 @@ const Cases: NextPage = () => {
                     size='lg'
                   />
                   <ItemInner>
-                    補習科目{' '}
+                    <span>{t('newCase.subject')}</span>
                     <Input
                       value={subject}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -166,7 +162,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faMars} color='#aaa' size='lg' />
                   <ItemInner>
-                    性別{' '}
+                    <span>{t('newCase.gender')}</span>
                     <Input
                       value={gender}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -179,7 +175,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faMars} color='#aaa' size='lg' />
                   <ItemInner>
-                    每星期堂數{' '}
+                    <span> {t('newCase.lesson')}</span>
                     <Input
                       value={lesson}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -193,7 +189,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faClockFour} color='#aaa' size='lg' />
                   <ItemInner>
-                    每堂時間
+                    <span> {t('newCase.hour')}</span>
                     <Input
                       value={hour}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -206,7 +202,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faMars} color='#aaa' size='lg' />
                   <ItemInner>
-                    每小時價錢
+                    <span>{t('newCase.price')}</span>
                     <Input
                       value={price}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -219,7 +215,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faMars} color='#aaa' size='lg' />
                   <ItemInner>
-                    補習區域{' '}
+                    <span>{t('newCase.region')}</span>
                     <Input
                       value={location}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -231,7 +227,7 @@ const Cases: NextPage = () => {
                 <Item>
                   <FontAwesomeIcon icon={faMars} color='#aaa' size='lg' />
                   <ItemInner>
-                    大廈名稱{' '}
+                    <span>{t('newCase.building')}</span>
                     <Input
                       value={building}
                       onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
@@ -243,7 +239,8 @@ const Cases: NextPage = () => {
               </ItemsWrapper>
               <ItemsWrapper>
                 <ItemTitle>
-                  選擇你開始的日期<ItemText>2022年5月22日</ItemText>
+                  {t('newCase.choose_date')}
+                  <ItemText>2022年5月22日</ItemText>
                 </ItemTitle>
 
                 <DayPicker />
@@ -255,7 +252,7 @@ const Cases: NextPage = () => {
             </RightBarWrapper>
           </LowerWrapper>
           <ItemsWrapper>
-            <ItemTitle>補習地點</ItemTitle>
+            <ItemTitle>{t('newCase.teach_location')}</ItemTitle>
             <p>
               {location}, {building}
             </p>
@@ -346,10 +343,6 @@ const ItemText = styled.span`
   display: block;
   color: #bbb;
   font-size: 14px;
-`
-
-const BackButton = styled(Link)`
-  background-color: #cc0000;
 `
 
 export default Cases

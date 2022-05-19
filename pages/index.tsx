@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import PageWrapper from 'src/components/global/PageWrapper'
 import BasicSearch from 'src/components/Search/BasicSearch'
 import TutorList from 'src/components/TutorList'
@@ -18,7 +18,7 @@ type Props = {
 
 const Home: NextPage = (props: Props) => {
   const { recommendations } = props
-  const { isTutor, name } = useSelector((state: StatusState) => state.user)
+  const { isTutor } = useSelector((state: StatusState) => state.user)
   const { t } = useTranslation()
 
   return (
@@ -30,15 +30,19 @@ const Home: NextPage = (props: Props) => {
 
       <PageWrapper>
         <ContentWrapper>
-          <Title>尋找{isTutor ? '你的學生' : '補習老師'}</Title>
+          <Title>
+            {isTutor
+              ? `${t('components.search.basicSearch.find_student')}`
+              : `${t('components.search.basicSearch.find_tutor')}`}
+          </Title>
           <UpperWrapper>
             <Header>
-              <Link href='/'>
-                <JoinButton>學生</JoinButton>
-              </Link>
+              <div />
               <BasicSearch />
               <Link href='/findstudent'>
-                <JoinButton>導師</JoinButton>
+                <JoinButton>
+                  {isTutor ? `${t('common.tutor')}` : `${t('common.student')}`}
+                </JoinButton>
               </Link>
             </Header>
           </UpperWrapper>

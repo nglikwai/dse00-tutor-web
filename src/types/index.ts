@@ -24,7 +24,7 @@ export type CaseUnit = {
 }
 
 export type User = {
-  login: boolean
+  isLogin: boolean
   reserveNumber: number[]
   isTutor: boolean
   _id: string

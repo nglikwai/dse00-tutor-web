@@ -1,4 +1,3 @@
-// import { useRouter } from 'next/router'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -6,52 +5,13 @@ import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'src/components/Select'
-import TutorList from 'src/components/TutorList'
-// import PATHNAME from 'src/constants/pathname'
+import { places, subjects } from 'src/constants/commonList'
 import { searchTutorRequest } from 'src/redux/search'
 import {
   isFetchingSelector,
   searchResultSelector,
 } from 'src/redux/search/selectors'
 import styled from 'styled-components'
-
-// TODO: fetch from API
-const places = [
-  '中西區',
-  '東區',
-  '南區',
-  '灣仔',
-  '九龍城',
-  '觀塘',
-  '深水埗',
-  '黃大仙',
-  '油尖旺',
-  '離島',
-  '葵青',
-  '北區',
-  '西貢',
-  '沙田',
-  '大埔',
-  '荃灣',
-  '屯門',
-  '元朗',
-]
-
-// TODO: fetch from API
-const subjects = [
-  '中文',
-  'eng',
-  'math',
-  'ls',
-  'phy',
-  'chem',
-  'bio',
-  'econ',
-  'bafs',
-  'geo',
-  'history',
-  '中國歷史',
-]
 
 const BasicSearch = () => {
   const { t } = useTranslation()
@@ -111,7 +71,11 @@ const BasicSearch = () => {
         </Link>
       </Row>
 
-      {isFetching && <SearchResult>Searching...</SearchResult>}
+      {isFetching && (
+        <SearchResult>
+          {t('components.search.basicSearch.searching')}
+        </SearchResult>
+      )}
 
       {/* {!!tutors.length && (
         <SearchResult>

@@ -1,14 +1,11 @@
-import user from 'models/user'
 import Link from 'next/link'
-import { LogoJsonLd } from 'next-seo'
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Dropdown from 'src/components/Dropdown'
 import Login from 'src/components/Login'
 import PATHNAME from 'src/constants/pathname'
 import { toggleLoginPageOpen } from 'src/redux/page'
-import { toggleOpenPageSelector } from 'src/redux/page/selectors'
 import { StatusState } from 'src/redux/page/types'
 import styled from 'styled-components'
 
@@ -37,7 +34,7 @@ const Header = () => {
                 <LinkWrapper>{t('nav.find_tutor')}</LinkWrapper>
               </StyledLink>
               <StyledLink href='/case/new'>
-                <LinkWrapper>建立補習個案</LinkWrapper>
+                <LinkWrapper>{t('nav.create_case')}</LinkWrapper>
               </StyledLink>
             </>
           )}

@@ -21,8 +21,8 @@ import styled from 'styled-components'
 
 const Cases: NextPage = () => {
   const { t } = useTranslation()
-  const [commented, setCommented] = useState(false)
-  const { login } = useSelector((state: StatusState) => state.user)
+  const [isCommented, setCommented] = useState(false)
+  const { isLogin } = useSelector((state: StatusState) => state.user)
 
   const onCommented = () => {
     setCommented(true)
@@ -41,32 +41,36 @@ const Cases: NextPage = () => {
               <Avator />
               <ItemTitle>
                 <FontAwesomeIcon icon={faShieldAlt} color='#444' size='lg' />
-                <ItemInner>已驗證</ItemInner>
+                <ItemInner>{t('profile.verified')}</ItemInner>
               </ItemTitle>
               <Item>
                 <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
-                <ItemInner>電話號碼</ItemInner>
+                <ItemInner>{t('profile.phone')}</ItemInner>
               </Item>
               <Item>
                 <FontAwesomeIcon icon={faCheck} color='#444' size='lg' />
-                <ItemInner>考試證書</ItemInner>
+                <ItemInner>{t('profile.cert')}</ItemInner>
               </Item>
             </LeftBarWrapper>
             <RightBarWrapper>
               <Header>
                 <ItemTitle>
-                  你好，我是陳加文老師 <ItemText>自 05-05-2022 加入</ItemText>
+                  {t('profile.hi')}，{t('profile.i_am')}陳加文
+                  {t('profile.teacher')}
+                  <ItemText>
+                    {t('profile.from')} 05-05-2022 {t('profile.join')}
+                  </ItemText>
                 </ItemTitle>
-                {login && (
+                {isLogin && (
                   <Link href='/tutor/edit'>
-                    <MoreButton>編輯</MoreButton>
+                    <MoreButton>{t('profile.edit')}</MoreButton>
                   </Link>
                 )}
               </Header>
 
               <Brief>
                 <div>
-                  <ItemTitle>關於陳老師</ItemTitle>
+                  <ItemTitle>{t('profile.about')}陳老師</ItemTitle>
                   <p>
                     I Søren Sarup (born 1975) lives in Aarhus, Fanø and Agger. I
                     am an independent Danish architect that works professionally
@@ -79,11 +83,11 @@ const Cases: NextPage = () => {
               <ItemsWrapper>
                 <Item>
                   <FontAwesomeIcon icon={faHouse} color='#555' size='lg' />
-                  <ItemInner>住在大埔</ItemInner>
+                  <ItemInner>{t('profile.live_in')}大埔</ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon icon={faBook} color='#555' size='lg' />
-                  <ItemInner>教授化學、生物</ItemInner>
+                  <ItemInner>{t('profile.teach')}化學、生物</ItemInner>
                 </Item>
                 <Item>
                   <FontAwesomeIcon
@@ -91,16 +95,16 @@ const Cases: NextPage = () => {
                     color='#555'
                     size='lg'
                   />
-                  <ItemInner>就讀香港中文大學</ItemInner>
+                  <ItemInner>{t('profile.study_at')}香港中文大學</ItemInner>
                 </Item>
               </ItemsWrapper>
               <ItemsWrapper>
-                <ItemTitle>課堂筆記</ItemTitle>
+                <ItemTitle>{t('profile.note')}</ItemTitle>
                 <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
                 <Notes src='https://1.bp.blogspot.com/-sP6euyqs1pc/XUMAy04i4gI/AAAAAAAGpAM/MThDM11XjO8B3WoScwLaGsvnz_uVhaN-QCLcBGAs/s1600/StockSnap_TBJ9OPDGMK%2B%255B2%255D.jpg' />
               </ItemsWrapper>
               <ItemsWrapper>
-                <ItemTitle>學生留言</ItemTitle>
+                <ItemTitle>{t('profile.comment')}</ItemTitle>
                 <Comment />
                 <Comment />
                 <Comment />
@@ -108,11 +112,11 @@ const Cases: NextPage = () => {
                 <Comment />
                 <Comment />
                 <Comment />
-                {login && !commented && (
+                {isLogin && !isCommented && (
                   <CommentBox onCommented={onCommented} />
                 )}
 
-                <MoreButton>更多留言</MoreButton>
+                <MoreButton>{t('profile.more_comment')}</MoreButton>
               </ItemsWrapper>
             </RightBarWrapper>
           </Wrapper>

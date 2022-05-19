@@ -7,7 +7,7 @@ export type StatusState = {
   pageStatus: {
     open: boolean
     loginPage: boolean
-    login: boolean
+    isLogin: boolean
     confirmPage: boolean
   }
   user: User

@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export interface SearchState {
   open: boolean
-  login: boolean
+  isLogin: boolean
   loginPage: boolean
   confirmPage: boolean
 }
 
 const initialState: SearchState = {
   open: false,
-  login: false,
+  isLogin: false,
   loginPage: false,
   confirmPage: false,
 }
@@ -25,10 +25,10 @@ export const pageStatusSlice = createSlice({
       state.loginPage = !state.loginPage
     },
     setLogin: (state) => {
-      state.login = true
+      state.isLogin = true
     },
     setLogout: (state) => {
-      state.login = false
+      state.isLogin = false
     },
 
     toggleConfirmPageOpen: (state) => {

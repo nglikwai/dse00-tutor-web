@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { signOut } from 'next-auth/client'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleLoginButtonOpen, toggleLoginPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
@@ -10,9 +11,10 @@ import { changeIsTutor } from 'src/redux/user'
 import styled from 'styled-components'
 
 const Dropdown = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { open } = useSelector((state: StatusState) => state.pageStatus)
-  const { isTutor, login, name } = useSelector(
+  const { isTutor, isLogin, name } = useSelector(
     (state: StatusState) => state.user,
   )
 
@@ -24,7 +26,7 @@ const Dropdown = () => {
   return (
     <Wrapper>
       <Link href='/tutor/1'>
-        <Name>{login ? `Hi, ${name}` : ''}</Name>
+        <Name>{isLogin ? `${t('profile.hi')}, ${name}` : ''}</Name>
       </Link>
 
       <ButtonWrapper
@@ -35,20 +37,27 @@ const Dropdown = () => {
       </ButtonWrapper>
       {open === true && (
         <Menu>
-          {!login ? (
+          {!isLogin ? (
             <>
-              <MenuItem onClick={LoginButtonOnClick}>Login</MenuItem>
-              <MenuItem onClick={LoginButtonOnClick}>Register</MenuItem>
+              <MenuItem onClick={LoginButtonOnClick}>
+                {t('buttons.login')}
+              </MenuItem>
+              <MenuItem onClick={LoginButtonOnClick}>
+                {t('buttons.signup')}
+              </MenuItem>
             </>
           ) : (
             <>
-              <MenuItem onClick={() => signOut()}>Log out</MenuItem>
+              <MenuItem onClick={() => signOut()}>
+                {t('buttons.logout')}
+              </MenuItem>
             </>
           )}
 
           <Link href='/'>
             <MenuItem onClick={() => dispatch(changeIsTutor())}>
-              切換至 {!isTutor ? '導師' : '學生'}
+              {t('buttons.switch_to')}{' '}
+              {!isTutor ? `${t('common.tutor')}` : `${t('common.student')}`}
             </MenuItem>
           </Link>
         </Menu>

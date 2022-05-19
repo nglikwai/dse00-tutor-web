@@ -19,9 +19,9 @@ const Login = (props: Props) => {
       <RightWrapper>
         <Name>陳小明</Name>
         <Comment />
-        <Submit onClick={onCommented}>
+        <SubmitButton onClick={onCommented}>
           <FontAwesomeIcon icon={faPaperPlane} color='white' size='1x' />
-        </Submit>
+        </SubmitButton>
       </RightWrapper>
     </CommentWrapper>
   )
@@ -38,7 +38,7 @@ const Comment = styled.textarea`
   border-radius: 1rem;
   border: 1px solid #ccc;
 `
-const Submit = styled.button`
+const SubmitButton = styled.button`
   &:hover {
     background-color: #dd0000;
   }
