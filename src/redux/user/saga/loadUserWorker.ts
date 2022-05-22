@@ -5,7 +5,7 @@ import { User } from 'src/types'
 export function* loadUserWorker() {
   try {
     const response = (yield call(() =>
-      fetch('https://tutor.dse00.com/api/auth/auth'),
+      fetch('http://localhost:3000/api/auth/auth'),
     )) as Response
 
     const user = (yield response.json()) as User
