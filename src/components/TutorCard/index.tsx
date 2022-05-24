@@ -25,7 +25,7 @@ const TutorCard = (props: Props) => {
         onClick={
           isLogin
             ? () => setFavor(!favor)
-            : () => dispatch(toggleLoginPageOpen())
+            : () => dispatch(toggleLoginPageOpen(true))
         }
       >
         <FontAwesomeIcon
