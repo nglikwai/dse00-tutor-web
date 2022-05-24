@@ -30,7 +30,9 @@ const ReserveForm = (props: Props) => {
       <ReserveButton
         color={reserved ? 'green' : '#cc0000'}
         onClick={() =>
-          dispatch(isLogin ? toggleConfirmPageOpen() : toggleLoginPageOpen())
+          dispatch(
+            isLogin ? toggleConfirmPageOpen() : toggleLoginPageOpen(true),
+          )
         }
         disabled={!!reserved}
       >
