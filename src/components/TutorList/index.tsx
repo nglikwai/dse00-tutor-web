@@ -21,8 +21,7 @@ const TutorList = (props: Props) => {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
+  flex-wrap: wrap;
 
   > * {
     flex: 0 0 auto;

@@ -12,22 +12,22 @@ export default NextAuth({
       async authorize(credentials) {
         dbConnect()
 
-        const { email, password } = credentials
+        const { name, password } = credentials
 
-        if (!email || !password) {
-          throw new Error('Please enter email or password')
+        if (!name || !password) {
+          throw new Error('Please enter name or password')
         }
 
-        const user = await User.findOne({ email }).select('+password')
+        const user = await User.findOne({ name }).select('+password')
 
         if (!user) {
-          throw new Error('Invalid Email or Password')
+          throw new Error('Invalid name or Password')
         }
 
         const isPasswordMatched = await user.comparePassword(password)
 
         if (!isPasswordMatched) {
-          throw new Error('invalid email or password')
+          throw new Error('invalid name or password')
         }
 
         return Promise.resolve(user)

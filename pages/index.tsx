@@ -39,11 +39,10 @@ const Home: NextPage = (props: Props) => {
             <Header>
               <div />
               <BasicSearch />
-              <Link href='/findstudent'>
-                <JoinButton>
-                  {isTutor ? `${t('common.tutor')}` : `${t('common.student')}`}
-                </JoinButton>
-              </Link>
+
+              <JoinButton>
+                {isTutor ? `${t('common.tutor')}` : `${t('common.student')}`}
+              </JoinButton>
             </Header>
           </UpperWrapper>
 
@@ -127,7 +126,6 @@ const JoinButton = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `
 
 const ContentWrapper = styled.div`

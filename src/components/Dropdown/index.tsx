@@ -19,14 +19,16 @@ const Dropdown = () => {
   )
 
   const LoginButtonOnClick = () => {
-    dispatch(toggleLoginPageOpen())
+    dispatch(toggleLoginPageOpen(true))
     dispatch(toggleLoginButtonOpen())
   }
 
   return (
     <Wrapper>
       <Link href='/tutor/1'>
-        <Name>{isLogin ? `${t('profile.hi')}, ${name}` : ''}</Name>
+        <Name>
+          {isLogin ? `${t('profile.hi')}, ${name.toUpperCase()}` : ''}
+        </Name>
       </Link>
 
       <ButtonWrapper

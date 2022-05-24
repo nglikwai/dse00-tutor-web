@@ -1,29 +1,39 @@
 import { GetServerSideProps } from 'next'
+import type { SignInResponse } from 'next-auth/client'
 import { getSession, signIn } from 'next-auth/client'
 import * as R from 'ramda'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { toggleLoginPageOpen } from 'src/redux/page'
+import { StatusState } from 'src/redux/page/types'
 import { loadUserRequest } from 'src/redux/user'
 import styled from 'styled-components'
 
 const Login = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
+  const { fetching } = useSelector((state: StatusState) => state.user)
+
   const loginHandler = async (e: React.MouseEvent) => {
-    dispatch(loadUserRequest())
     e.preventDefault()
 
-    const result = await signIn('credentials', {
+    const result = (await signIn('credentials', {
       redirect: false,
-      email,
+      name,
       password,
-    })
-    dispatch(toggleLoginPageOpen())
+    })) as unknown as SignInResponse
+
+    if (result.error) {
+      toast.error(result.error)
+    } else {
+      dispatch(loadUserRequest())
+      dispatch(toggleLoginPageOpen(false))
+    }
   }
   return (
     <Wrapper>
@@ -31,9 +41,9 @@ const Login = () => {
       <Welcome>{t('common.welcome')}</Welcome>
       <Input
         placeholder='username'
-        type='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type='text'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <Input
         placeholder='password'
@@ -41,9 +51,11 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <SubmitButton color={'#cc0000'} onClick={loginHandler}>
-        {t('buttons.continue')}
-      </SubmitButton>
+      {fetching === false && (
+        <SubmitButton color={'#cc0000'} onClick={loginHandler}>
+          {t('buttons.continue')}
+        </SubmitButton>
+      )}
       <p>{t('common.or')}</p>
       <SubmitButton primary='true'>{t('buttons.loginWithGoogle')}</SubmitButton>
       <SubmitButton primary='true'>{t('buttons.loginWithApple')}</SubmitButton>

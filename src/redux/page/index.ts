@@ -21,8 +21,8 @@ export const pageStatusSlice = createSlice({
     toggleLoginButtonOpen: (state) => {
       state.open = !state.open
     },
-    toggleLoginPageOpen: (state) => {
-      state.loginPage = !state.loginPage
+    toggleLoginPageOpen: (state, action) => {
+      state.loginPage = action.payload
     },
     setLogin: (state) => {
       state.isLogin = true

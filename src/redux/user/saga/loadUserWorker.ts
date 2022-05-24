@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import { loadUserSuccess } from 'src/redux/user'
+import { loadUserFail, loadUserSuccess } from 'src/redux/user'
 import { User } from 'src/types'
 
 export function* loadUserWorker() {
@@ -13,6 +13,8 @@ export function* loadUserWorker() {
     yield put(loadUserSuccess({ user }))
   } catch (err) {
     // TODO: handle error
+    yield put(loadUserFail())
+
     console.log(err)
   }
 }
