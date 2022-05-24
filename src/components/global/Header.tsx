@@ -45,7 +45,7 @@ const Header = () => {
       </Wrapper>
       {loginPage === true && (
         <ModalWrapper>
-          <Close onClick={() => dispatch(toggleLoginPageOpen())}>X</Close>
+          <Close onClick={() => dispatch(toggleLoginPageOpen(false))}>X</Close>
           <Login />
         </ModalWrapper>
       )}

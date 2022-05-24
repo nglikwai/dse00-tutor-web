@@ -1,16 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { env } from 'process'
 import * as R from 'ramda'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 import Footer from 'src/components/global/Footer'
 import Header from 'src/components/global/Header'
 import { toggleLoginButtonOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
 import { loadUserRequest } from 'src/redux/user'
 import styled from 'styled-components'
-
 type Props = {
   children: React.ReactNode
 }
@@ -36,6 +37,7 @@ const PageWrapper = (props: Props) => {
     <Wrapper {...restProps}>
       <InnerWrapper onClick={onClickHandler}>
         <Header />
+        <ToastContainer position='bottom-right' />
         <ContentWrapper withTopPadding>{children}</ContentWrapper>
         <Footer />
       </InnerWrapper>

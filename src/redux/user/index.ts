@@ -38,6 +38,9 @@ export const userSlice = createSlice({
       state.createdAt = action.payload.user.user.createdAt
       state.avatar = action.payload.user.user.avatar
     },
+    loadUserFail: (state) => {
+      state.fetching = false
+    },
     logout: (state) => {
       state.isLogin = false
     },
@@ -50,6 +53,7 @@ export const {
   loadUserRequest,
   loadUserSuccess,
   logout,
+  loadUserFail,
 } = userSlice.actions
 
 export default userSlice.reducer
