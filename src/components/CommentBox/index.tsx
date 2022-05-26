@@ -33,7 +33,7 @@ const Name = styled.div`
 const Comment = styled.textarea`
   padding: 12px;
   margin-top: 12px;
-  width: 440px;
+  width: 100%;
   height: 100px;
   border-radius: 1rem;
   border: 1px solid #ccc;
@@ -53,9 +53,11 @@ const SubmitButton = styled.button`
 const CommentWrapper = styled.div`
   display: flex;
   margin: 30px 0;
+  width: 100%;
 `
 
 const RightWrapper = styled.div`
   padding: 10px 20px;
+  width: 100%;
 `
 export default Login

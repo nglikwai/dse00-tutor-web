@@ -17,6 +17,7 @@ import Comment from 'src/components/Comment'
 import CommentBox from 'src/components/CommentBox'
 import PageWrapper from 'src/components/global/PageWrapper'
 import { StatusState } from 'src/redux/page/types'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 const Cases: NextPage = () => {
@@ -141,6 +142,10 @@ const ContentWrapper = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  ${down('tablet')} {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 const LeftBarWrapper = styled.div`
@@ -153,11 +158,18 @@ const LeftBarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${down('tablet')} {
+    justify-content: center;
+    width: 80%;
+  }
 `
 const RightBarWrapper = styled.div`
   padding: 0 20px;
   margin: 20px 0;
-  width: 700px;
+  width: 70%;
+  ${down('tablet')} {
+    width: 100%;
+  }
 `
 
 const Avator = styled((props) => (
@@ -175,7 +187,6 @@ const Avator = styled((props) => (
 const Brief = styled.div`
   display: flex;
   padding: 0 0 20px 0;
-  justify-content: space-between;
   border-bottom: 1px solid #ccc;
 `
 
@@ -185,9 +196,11 @@ const ItemsWrapper = styled.div`
 `
 const Notes = styled.img`
   width: 300px;
-  height: 200px;
   border-radius: 1rem;
-  margin: 0 20px 0 0;
+  margin: 0 20px 20px 0;
+  ${down('tablet')} {
+    width: 90%;
+  }
 `
 
 const Item = styled.div`

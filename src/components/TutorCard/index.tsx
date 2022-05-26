@@ -8,6 +8,7 @@ import Tag from 'src/components/Tags'
 import { toggleLoginPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
 import { Tutor } from 'src/types'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 type Props = {
@@ -60,6 +61,18 @@ const Wrapper = styled.div`
   margin: 0 0 4px 8px;
   cursor: pointer;
   transition: 0.5s;
+  ${down('desktop')} {
+    width: 30%;
+    min-width: 220px;
+  }
+  ${down('tablet')} {
+    width: 45%;
+    min-width: 220px;
+  }
+  ${down('mobile')} {
+    width: 100%;
+    min-width: 220px;
+  }
 `
 const PopularTag = styled.span`
   &:hover {

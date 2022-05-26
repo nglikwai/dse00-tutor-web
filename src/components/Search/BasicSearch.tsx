@@ -89,6 +89,7 @@ const BasicSearch = () => {
 
 const Wrapper = styled.div`
   padding: 20px 0;
+  margin: 0 20px;
 `
 
 const Row = styled.div`

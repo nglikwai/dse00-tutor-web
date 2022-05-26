@@ -19,6 +19,7 @@ import {
   isFetchingSelector,
   searchResultSelector,
 } from 'src/redux/search/selectors'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 // TODO: fetch from API
@@ -109,17 +110,18 @@ const SearchBar = () => {
           value={selectedSubject}
           onSelect={handleOnSubjectSelect}
         />
+        <TabletOnly>
+          <label>學費</label>
 
-        <label>學費</label>
-
-        <Range type='range' className='range' min={50} max={300} />
-        <span className='price'>($180)</span>
-        <div>
+          <Range type='range' className='range' min={50} max={300} />
+          <span className='price'>($180)</span>
+        </TabletOnly>
+        <TabletOnly>
           <Button onClick={handleOnSearch}>
             <FontAwesomeIcon icon={faMars} color='white' size='lg' />
             <span style={{ padding: '0 0 0 10px' }}>女性</span>
           </Button>
-        </div>
+        </TabletOnly>
 
         <FilterButton>
           <FontAwesomeIcon icon={faBars} color='grey' size='lg' />
@@ -151,7 +153,9 @@ const SearchWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  padding: 0 10px;
+`
 
 const Title = styled.h2`
   font-size: 24px;
@@ -162,6 +166,11 @@ const Row = styled.div`
 
   > *:not(:last-child) {
     margin-right: 24px;
+  }
+`
+const TabletOnly = styled.div`
+  ${down('tablet')} {
+    display: none;
   }
 `
 const Button = styled.button`

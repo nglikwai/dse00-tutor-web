@@ -18,6 +18,7 @@ import PageWrapper from 'src/components/global/PageWrapper'
 import Map from 'src/components/Map/index'
 import ReserveForm from 'src/components/ReserveForm'
 import { CaseUnit } from 'src/types'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 const Cases: NextPage = () => {
@@ -292,17 +293,29 @@ const Header = styled.div`
 const ContentWrapper = styled.div`
   max-width: ${({ theme }) => theme.width};
   margin: 0 auto;
+  padding: 0 10px;
 `
 
 const LowerWrapper = styled.div`
   display: flex;
+  ${down('tablet')} {
+    flex-direction: column-reverse;
+  }
 `
 
 const LeftBarWrapper = styled.div`
   width: 800px;
   padding: 10px 60px 0 0;
+  ${down('tablet')} {
+    width: 100%;
+  }
 `
-const RightBarWrapper = styled.div``
+const RightBarWrapper = styled.div`
+  ${down('tablet')} {
+    display: flex;
+    justify-content: center;
+  }
+`
 
 const Avator = styled.div`
   border-radius: 50%;
