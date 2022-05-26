@@ -5,9 +5,11 @@ import { signOut } from 'next-auth/client'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import PATHNAME from 'src/constants/pathname'
 import { toggleLoginButtonOpen, toggleLoginPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
 import { changeIsTutor } from 'src/redux/user'
+import { down, up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 const Dropdown = () => {
@@ -53,6 +55,14 @@ const Dropdown = () => {
               <MenuItem onClick={() => signOut()}>
                 {t('buttons.logout')}
               </MenuItem>
+              <TabletOnlyItem>
+                <Link href={PATHNAME.FIND_STUDENT}>
+                  <MenuItem>{t('nav.find_student')}</MenuItem>
+                </Link>
+                <Link href='/case/new'>
+                  <MenuItem>{t('nav.create_case')}</MenuItem>
+                </Link>
+              </TabletOnlyItem>
             </>
           )}
 
@@ -108,6 +118,12 @@ const MenuItem = styled.div`
   border-radius: 1.5rem;
   transition: 0.4s;
   cursor: pointer;
+`
+
+const TabletOnlyItem = styled.div`
+  ${up('tablet')} {
+    display: none;
+  }
 `
 
 const Name = styled.span`

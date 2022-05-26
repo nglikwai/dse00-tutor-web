@@ -14,6 +14,7 @@ import {
   searchResultSelector,
 } from 'src/redux/search/selectors'
 import { Tutor } from 'src/types'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 const places = [
@@ -120,9 +121,6 @@ const Search: NextPage = (props: Props) => {
             <TutorList tutors={tutors} />
             <TutorList tutors={tutors} />
             <TutorList tutors={tutors} />
-            <TutorList tutors={tutors} />
-            <TutorList tutors={tutors} />
-            <TutorList tutors={tutors} />
           </Section>
           {isFetching && (
             <Spinner>
@@ -154,6 +152,9 @@ const ContentWrapper = styled.div`
 const Section = styled.div`
   padding: 20px 0;
   width: ${({ theme }) => theme.width};
+  ${down('tablet')} {
+    width: 100%;
+  }
 `
 
 const SectionTitle = styled.h3`

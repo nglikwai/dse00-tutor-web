@@ -9,7 +9,7 @@ import BasicSearch from 'src/components/Search/BasicSearch'
 import TutorList from 'src/components/TutorList'
 import { StatusState } from 'src/redux/page/types'
 import { Tutor } from 'src/types'
-import { up } from 'styled-breakpoints'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 type Props = {
@@ -76,20 +76,8 @@ const Home: NextPage = (props: Props) => {
 }
 
 const Title = styled.h2`
-  font-size: 14px;
+  font-size: 20px;
   margin: 20px 0 0 0;
-
-  ${up('tablet')} {
-    font-size: 16px;
-  }
-
-  ${up('laptop')} {
-    font-size: 18px;
-  }
-
-  ${up('desktop')} {
-    font-size: 20px;
-  }
 `
 
 const UpperWrapper = styled.div`
@@ -111,6 +99,9 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${down('tablet')} {
+    flex-direction: column;
+  }
 `
 const JoinButton = styled.span`
   &:hover {
@@ -126,6 +117,9 @@ const JoinButton = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${down('tablet')} {
+    display: none;
+  }
 `
 
 const ContentWrapper = styled.div`
@@ -138,11 +132,15 @@ const ContentWrapper = styled.div`
 const Section = styled.div`
   padding: 20px 0;
   width: ${({ theme }) => theme.width};
+  ${down('desktop')} {
+    width: 100%;
+  }
 `
 
 const SectionTitle = styled.h3`
   font-size: 20px;
   font-weight: bold;
+  padding: 0 10px;
 `
 
 export async function getServerSideProps() {

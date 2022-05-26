@@ -7,6 +7,7 @@ import Login from 'src/components/Login'
 import PATHNAME from 'src/constants/pathname'
 import { toggleLoginPageOpen } from 'src/redux/page'
 import { StatusState } from 'src/redux/page/types'
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 const Header = () => {
@@ -59,6 +60,7 @@ const OuterWrapper = styled.div`
   display: flex;
   justify-content: center;
   transition: 0.5s;
+  padding: 0 10px;
 `
 const Wrapper = styled.div`
   color: #fff;
@@ -84,7 +86,7 @@ const LogoWrapper = styled.span`
   font-size: 20px;
   cursor: pointer;
   font-weight: bold;
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 0px;
 `
 
 const LinkWrapper = styled.span`
@@ -95,6 +97,10 @@ const LinkWrapper = styled.span`
   font-size: 18px;
   cursor: pointer;
   padding: 0 20px;
+
+  ${down('tablet')} {
+    display: none;
+  }
 `
 
 const ModalWrapper = styled.div`
