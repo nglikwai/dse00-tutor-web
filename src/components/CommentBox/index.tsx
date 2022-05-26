@@ -11,11 +11,7 @@ const Login = (props: Props) => {
   const { onCommented } = props
   return (
     <CommentWrapper>
-      <img
-        src='https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
-        width='90px'
-        height='90px'
-      />{' '}
+      <img src='/user.png' width='90px' height='90px' />{' '}
       <RightWrapper>
         <Name>陳小明</Name>
         <Comment />

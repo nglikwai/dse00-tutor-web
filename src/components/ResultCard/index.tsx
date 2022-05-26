@@ -46,7 +46,7 @@ const Avator = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url('https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png');
+  background-image: url('/user.png');
   display: inline-block;
 `
 

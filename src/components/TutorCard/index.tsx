@@ -36,10 +36,7 @@ const TutorCard = (props: Props) => {
         />
       </PopularTag>
       <Link href='/tutor/1'>
-        <Avatar
-          src='https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
-          alt='Avatar of the tutor'
-        />
+        <Avatar src='/user.png' alt='Avatar of the tutor' />
       </Link>
 
       <Name>{tutor.name}</Name>
